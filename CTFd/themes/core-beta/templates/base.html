@@ -373,7 +373,7 @@
     .table tbody tr:nth-child(even) { background: var(--poke-bg) !important; }
     .table tbody tr:hover { background: rgba(255,204,0,0.2) !important; }
     .table td, .table th { border-color: rgba(30,22,8,0.18) !important; }
-    .table a { color: var(--poke-blue) !important; }
+    .table a { color: var(--poke-dark) !important; }
     .table a:hover { color: var(--poke-red) !important; }
 
     /* .table-themed override (used in users/teams) */
@@ -387,12 +387,16 @@
     .table-themed thead th {
       background: var(--poke-dark) !important;
       color: var(--poke-yellow) !important;
-      border-color: var(--poke-yellow) !important;
+      border-color: rgba(240,168,0,0.3) !important;
     }
-    .table-themed tbody tr { background: var(--poke-panel) !important; color: var(--poke-dark) !important; }
-    .table-themed tbody tr:nth-child(even) { background: var(--poke-bg) !important; }
-    .table-themed tbody tr:hover { background: rgba(255,204,0,0.2) !important; }
-    .table-themed a { color: var(--poke-blue) !important; font-weight: bold; }
+    .table-themed tbody td {
+      background: var(--poke-panel);
+      color: var(--poke-dark);
+      border-color: rgba(30,22,8,0.1) !important;
+    }
+    .table-themed tbody tr:nth-child(even) td { background: var(--poke-bg); }
+    .table-themed tbody tr:hover td { background: rgba(240,168,0,0.15); }
+    .table-themed a { color: var(--poke-dark) !important; font-weight: bold; }
     .table-themed a:hover { color: var(--poke-red) !important; }
     .table-themed .badge.bg-secondary {
       background-color: var(--poke-dark) !important;

@@ -12,9 +12,17 @@
     }
     .jumbotron h1 {
         color: var(--poke-yellow) !important;
-        text-shadow: 3px 3px 0 var(--poke-blue) !important;
+        text-shadow: 2px 2px 0 var(--poke-blue) !important;
     }
     .jumbotron p { color: rgba(255,255,255,0.9) !important; }
+
+    #score-graph {
+        background: var(--poke-panel) !important;
+        border: var(--pixel-border) !important;
+        box-shadow: var(--pixel-shadow) !important;
+        margin-bottom: 1.5rem;
+        min-height: 420px;
+    }
 
     .scoreboard-wrapper {
         margin-top: 2rem;
@@ -51,15 +59,17 @@
         line-height: 1.8;
         white-space: nowrap;
     }
-    .hall-of-fame-table tbody tr {
-        background: var(--poke-panel) !important;
-        border-bottom: 1px solid rgba(30,22,8,0.12);
+    .hall-of-fame-table tbody tr td {
+        background: var(--poke-panel);
+        border-bottom: 1px solid rgba(30,22,8,0.1);
+        padding-top: 10px;
+        padding-bottom: 10px;
     }
-    .hall-of-fame-table tbody tr:nth-child(even) {
-        background: var(--poke-bg) !important;
+    .hall-of-fame-table tbody tr:nth-child(even) td {
+        background: var(--poke-bg);
     }
-    .hall-of-fame-table tbody tr:last-child { border-bottom: none; }
-    .hall-of-fame-table tbody tr:hover { background: rgba(240,168,0,0.15) !important; }
+    .hall-of-fame-table tbody tr:hover td { background: rgba(240,168,0,0.18); }
+    .hall-of-fame-table tbody tr:last-child td { border-bottom: none; }
     .hall-of-fame-table tbody a {
         color: var(--poke-dark) !important;
         font-weight: bold;
@@ -70,17 +80,17 @@
     .hall-of-fame-table .team-col { width: 55%; }
     .hall-of-fame-table .score-col { width: 33%; }
 
-    /* top-3 row tints for legibility on cream background */
-    .rank-1-row { background: rgba(200,150,0,0.12) !important; }
-    .rank-2-row { background: rgba(120,120,120,0.1) !important; }
-    .rank-3-row { background: rgba(140,80,20,0.1) !important; }
+    /* top-3: left accent border on first cell */
+    .rank-1-row td:first-child { border-left: 4px solid #c47e00; }
+    .rank-2-row td:first-child { border-left: 4px solid #777777; }
+    .rank-3-row td:first-child { border-left: 4px solid #8b4513; }
 
     .rank-medal { font-size: 1.2rem; margin-left: 6px; vertical-align: middle; }
-    .rank-1 { color: #c47e00; }   /* darker gold — readable on cream */
-    .rank-2 { color: #666666; }   /* dark gray — readable on cream */
-    .rank-3 { color: #8b4513; }   /* dark bronze/saddle brown */
+    .rank-1 { color: #c47e00; }
+    .rank-2 { color: #666666; }
+    .rank-3 { color: #8b4513; }
 
-    .current-user { background-color: rgba(58,106,160,0.15) !important; font-weight: bold; }
+    .current-user td { background: rgba(58,106,160,0.12) !important; font-weight: bold; }
 
     .score-bar-cell { padding: 8px 14px !important; }
     .score-bar-wrap { display: flex; align-items: center; gap: 10px; }

@@ -4,30 +4,30 @@ import { cumulativeSum } from "../../math";
 import dayjs from "dayjs";
 
 export function getOption(mode, places, optionMerge) {
-  const pokemonPalette = ['#ffd733', '#3B4CCA', '#E3350D', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b', '#e377c2', '#7f7f7f'];
+  // Palette visible on parchment/light background
+  const pokemonPalette = ['#3B4CCA', '#E3350D', '#c47e00', '#2ca02c', '#9467bd', '#8c564b', '#0e7c86', '#d62728', '#ff7f0e', '#7f7f7f'];
+  const inkDark = '#1e1608';
+  const inkMid = 'rgba(30,22,8,0.4)';
+  const inkFaint = 'rgba(30,22,8,0.07)';
   let option = {
     color: pokemonPalette,
     backgroundColor: 'transparent',
-    textStyle: {
-      color: '#ffd733'
-    },
+    textStyle: { color: inkDark, fontFamily: 'Lato, sans-serif' },
     title: {
       left: "center",
       text: "Top 10 " + (mode === "teams" ? "Teams" : "Users"),
       textStyle: {
-        color: '#ffd733',
-        fontFamily: 'Pokemon Solid, sans-serif',
-        fontSize: 20,
+        color: inkDark,
+        fontFamily: "'Press Start 2P', 'Courier New', monospace",
+        fontSize: 13,
       }
     },
     tooltip: {
       trigger: "axis",
-      backgroundColor: 'rgba(0, 0, 0, 0.8)',
-      borderColor: '#ffd733',
-      textStyle: { color: '#ffd733' },
-      axisPointer: {
-        type: "cross",
-      },
+      backgroundColor: 'rgba(30,22,8,0.88)',
+      borderColor: '#f0a800',
+      textStyle: { color: '#f0a800', fontFamily: 'Lato, sans-serif' },
+      axisPointer: { type: "cross" },
     },
     legend: {
       type: "scroll",
@@ -35,13 +35,13 @@ export function getOption(mode, places, optionMerge) {
       align: "left",
       bottom: 35,
       data: [],
-      textStyle: { color: '#ffd733' }
+      textStyle: { color: inkDark }
     },
     toolbox: {
+      iconStyle: { borderColor: inkMid },
+      emphasis: { iconStyle: { borderColor: inkDark } },
       feature: {
-        dataZoom: {
-          yAxisIndex: "none",
-        },
+        dataZoom: { yAxisIndex: "none" },
         saveAsImage: {},
       },
     },
@@ -56,23 +56,19 @@ export function getOption(mode, places, optionMerge) {
         type: "time",
         boundaryGap: false,
         data: [],
-        axisLine: { lineStyle: { color: '#3B4CCA' } },
-        axisLabel: {
-          color: '#ffd733',
-          textStyle: { color: '#ffd733' }
-        },
+        axisLine: { lineStyle: { color: inkMid } },
+        axisTick: { lineStyle: { color: inkMid } },
+        axisLabel: { color: inkDark },
         splitLine: { show: false }
       },
     ],
     yAxis: [
       {
         type: "value",
-        axisLine: { lineStyle: { color: '#3B4CCA' } },
-        axisLabel: {
-          color: '#ffd733',
-          textStyle: { color: '#ffd733' }
-        },
-        splitLine: { lineStyle: { color: 'rgba(255,255,255,0.1)' } },
+        axisLine: { show: true, lineStyle: { color: inkMid } },
+        axisTick: { lineStyle: { color: inkMid } },
+        axisLabel: { color: inkDark },
+        splitLine: { lineStyle: { color: inkFaint } },
         min: 0,
         scale: true
       },
@@ -85,9 +81,18 @@ export function getOption(mode, places, optionMerge) {
         filterMode: "filter",
         height: 20,
         top: 35,
-        fillerColor: 'rgba(255, 215, 0, 0.3)',
-        handleStyle: { color: '#ffd733' },
-        textStyle: { color: '#ffd733' }
+        fillerColor: 'rgba(240,168,0,0.2)',
+        borderColor: inkMid,
+        handleStyle: { color: inkDark },
+        textStyle: { color: inkDark },
+        dataBackground: {
+          lineStyle: { color: inkMid },
+          areaStyle: { color: 'rgba(30,22,8,0.04)' },
+        },
+        selectedDataBackground: {
+          lineStyle: { color: '#f0a800' },
+          areaStyle: { color: 'rgba(240,168,0,0.1)' },
+        },
       },
     ],
     series: [],

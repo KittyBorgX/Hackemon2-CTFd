@@ -11,6 +11,8 @@
       display: flex;
       align-items: center;
       gap: 12px;
+      border-bottom: 3px solid var(--poke-red);
+      padding-bottom: 0.75rem;
       margin-bottom: 1.5rem;
     }
     .section-label {
@@ -18,10 +20,10 @@
       font-size: 0.6rem;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: var(--poke-yellow);
-      background: var(--poke-dark);
+      color: #fff;
+      background: var(--poke-red);
       padding: 5px 12px;
-      border: 2px solid var(--poke-yellow);
+      border: 2px solid var(--poke-dark);
       display: inline-block;
       line-height: 1.8;
     }
@@ -29,8 +31,14 @@
       font-family: var(--poke-font) !important;
       color: var(--poke-dark) !important;
       font-size: 1rem !important;
-      text-shadow: 2px 2px 0 var(--poke-yellow);
+      text-shadow: 1px 1px 0 var(--poke-red);
       margin: 0;
+    }
+    /* Red accent on team table header */
+    .table-themed thead th {
+      background: var(--poke-red) !important;
+      color: #fff !important;
+      border-color: rgba(255,255,255,0.2) !important;
     }
     .search-form .form-select,
     .search-form .form-control {
@@ -77,6 +85,7 @@
     <div class="page-header">
       <span class="section-label">▶ TEAM REGISTRY</span>
       <h1 class="teams-title">{% trans %}Teams{% endtrans %}</h1>
+      <span style="font-family: var(--poke-font); font-size: 0.52rem; color: var(--poke-red); margin-left: auto; line-height: 1.8;">POKEMON RED</span>
     </div>
 
     {% if q and field %}

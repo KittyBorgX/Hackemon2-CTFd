@@ -7,8 +7,8 @@
 
     .jumbotron {
         background: var(--poke-dark) !important;
-        border-bottom: 4px solid var(--poke-yellow);
-        padding: 2.5rem 1rem;
+        border-bottom: 3px solid var(--poke-yellow);
+        padding: 2rem 1rem;
     }
     .jumbotron h1 {
         color: var(--poke-yellow) !important;
@@ -16,51 +16,79 @@
     }
     .jumbotron p { color: rgba(255,255,255,0.9) !important; }
 
+    .scoreboard-wrapper {
+        margin-top: 2rem;
+        border: var(--pixel-border);
+        box-shadow: var(--pixel-shadow);
+    }
+    .scoreboard-label {
+        font-family: var(--poke-font);
+        font-size: 0.6rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--poke-yellow);
+        background: var(--poke-dark);
+        padding: 5px 14px;
+        border: 2px solid var(--poke-yellow);
+        display: inline-block;
+        margin-bottom: 0;
+        line-height: 1.8;
+    }
     .hall-of-fame-table {
         background: var(--poke-panel);
-        border: var(--pixel-border);
+        border: none;
         border-radius: 0 !important;
-        overflow: hidden;
-        box-shadow: var(--pixel-shadow);
+        width: 100%;
+        margin-bottom: 0;
     }
     .hall-of-fame-table thead th {
         background: var(--poke-dark) !important;
         color: var(--poke-yellow) !important;
         font-family: var(--poke-font) !important;
-        font-size: 0.68rem !important;
-        border-color: var(--poke-yellow) !important;
-        text-align: center;
-        padding: 12px !important;
+        font-size: 0.65rem !important;
+        border-color: var(--poke-dark) !important;
+        padding: 12px 14px !important;
         line-height: 1.8;
+        white-space: nowrap;
     }
     .hall-of-fame-table tbody tr {
         background: var(--poke-panel) !important;
-        border-bottom: 2px solid rgba(30,22,8,0.15);
+        border-bottom: 1px solid rgba(30,22,8,0.12);
     }
     .hall-of-fame-table tbody tr:nth-child(even) {
         background: var(--poke-bg) !important;
     }
     .hall-of-fame-table tbody tr:last-child { border-bottom: none; }
-    .hall-of-fame-table tbody tr:hover { background: rgba(255,204,0,0.25) !important; }
+    .hall-of-fame-table tbody tr:hover { background: rgba(240,168,0,0.15) !important; }
+    .hall-of-fame-table tbody a {
+        color: var(--poke-dark) !important;
+        font-weight: bold;
+    }
+    .hall-of-fame-table tbody a:hover { color: var(--poke-red) !important; }
 
-    .hall-of-fame-table .rank-col { width: 10%; }
-    .hall-of-fame-table .team-col { width: 60%; }
-    .hall-of-fame-table .score-col { width: 30%; }
+    .hall-of-fame-table .rank-col { width: 12%; min-width: 70px; }
+    .hall-of-fame-table .team-col { width: 55%; }
+    .hall-of-fame-table .score-col { width: 33%; }
 
-    .rank-medal { font-size: 1.4rem; margin-left: 8px; }
-    .rank-1 { color: #ffd700; }
-    .rank-2 { color: #c0c0c0; }
-    .rank-3 { color: #cd7f32; }
+    /* top-3 row tints for legibility on cream background */
+    .rank-1-row { background: rgba(200,150,0,0.12) !important; }
+    .rank-2-row { background: rgba(120,120,120,0.1) !important; }
+    .rank-3-row { background: rgba(140,80,20,0.1) !important; }
 
-    .current-user { background-color: rgba(44,108,179,0.2) !important; font-weight: bold; }
+    .rank-medal { font-size: 1.2rem; margin-left: 6px; vertical-align: middle; }
+    .rank-1 { color: #c47e00; }   /* darker gold — readable on cream */
+    .rank-2 { color: #666666; }   /* dark gray — readable on cream */
+    .rank-3 { color: #8b4513; }   /* dark bronze/saddle brown */
 
-    .score-bar-cell { padding: 8px 12px !important; }
-    .score-bar-wrap { display: flex; align-items: center; gap: 8px; }
+    .current-user { background-color: rgba(58,106,160,0.15) !important; font-weight: bold; }
+
+    .score-bar-cell { padding: 8px 14px !important; }
+    .score-bar-wrap { display: flex; align-items: center; gap: 10px; }
     .score-bar-inner {
         flex: 1;
         height: 10px;
-        background: rgba(30,22,8,0.15);
-        border: 2px solid var(--poke-dark);
+        background: rgba(30,22,8,0.1);
+        border: 1px solid rgba(30,22,8,0.3);
         border-radius: 0;
         overflow: hidden;
     }
@@ -69,26 +97,28 @@
         background: var(--poke-blue);
         transition: width 1s ease;
     }
-    .rank-1-row .score-bar-fill { background: #ffd700; }
-    .rank-2-row .score-bar-fill { background: #c0c0c0; }
-    .rank-3-row .score-bar-fill { background: #cd7f32; }
+    .rank-1-row .score-bar-fill { background: #c47e00; }
+    .rank-2-row .score-bar-fill { background: #666666; }
+    .rank-3-row .score-bar-fill { background: #8b4513; }
     .score-value {
         font-family: var(--poke-font);
         font-size: 0.65rem;
         color: var(--poke-dark);
-        min-width: 54px;
+        min-width: 58px;
         text-align: right;
         line-height: 1.8;
+        white-space: nowrap;
     }
 
     .nav-pills .nav-link {
         font-family: var(--poke-font) !important;
-        font-size: 0.55rem !important;
+        font-size: 0.6rem !important;
         border-radius: 0 !important;
         border: 2px solid var(--poke-dark) !important;
         color: var(--poke-dark) !important;
         margin: 2px;
-        padding: 6px 12px !important;
+        padding: 7px 14px !important;
+        line-height: 1.8;
     }
     .nav-pills .nav-link.active {
         background: var(--poke-dark) !important;
@@ -130,8 +160,11 @@
         </template>
 
         <div class="col-md-12" x-show="standings.length">
-          <div data-poke-panel="HALL OF FAME" style="border: var(--pixel-border); box-shadow: var(--pixel-shadow); overflow: hidden;">
-            <table class="table align-middle hall-of-fame-table" style="border: none; box-shadow: none; margin-bottom: 0;">
+          <div class="mb-2">
+            <span class="scoreboard-label">▶ HALL OF FAME</span>
+          </div>
+          <div class="scoreboard-wrapper">
+            <table class="table align-middle hall-of-fame-table">
                 <thead>
                     <tr>
                         <th class="rank-col text-center">{% trans %}Rank{% endtrans %}</th>
@@ -169,7 +202,7 @@
                     </template>
                 </tbody>
             </table>
-          </div>
+          </div><!-- scoreboard-wrapper -->
         </div>
 
         <div class="col-md-12" x-show="!standings.length">

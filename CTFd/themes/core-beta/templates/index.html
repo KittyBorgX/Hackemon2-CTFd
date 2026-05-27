@@ -138,11 +138,11 @@
 
 {% block content %}
 <section class="pokemon-hero">
-    <img src="{{ url_for('views.themes', path='img/CCLogo_BG_Removed.png') }}" alt="CC Logo" class="hero-logo-left">
-    <img src="{{ url_for('views.themes', path='img/RVCE_Logo_With_Text.png') }}" alt="RVCE Logo" class="hero-logo-right">
+    <img src="{{ url_for('views.themes', path='img/CCLogo_BG_Removed.png') }}" alt="CC Logo" class="hero-logo-left" onerror="this.style.display='none'">
+    <img src="{{ url_for('views.themes', path='img/RVCE_Logo_With_Text.png') }}" alt="RVCE Logo" class="hero-logo-right" onerror="this.style.display='none'">
     <div class="container text-center">
         <div class="logo-container mb-2">
-            <img src="{{ url_for('views.themes', path='img/Hackemon_Logo.png') }}" alt="HACKeMON" class="hackemon-logo">
+            <img src="{{ url_for('views.themes', path='img/Hackemon_Logo.png') }}" alt="HACKeMON" class="hackemon-logo" onerror="this.style.display='none'">
         </div>
 
         <p class="pokemon-tagline">
@@ -169,7 +169,7 @@
                             <i class="fas fa-flag me-2"></i> Enter Arena
                         </a>
                     {% endif %}
-                    <img src="{{ url_for('views.themes', path='img/Pikachu_hi_transparent.png') }}" alt="Pikachu" class="pikachu-image">
+                    <img src="{{ url_for('views.themes', path='img/Pikachu_hi_transparent.png') }}" alt="Pikachu" class="pikachu-image" onerror="this.style.display='none'">
                 </div>
             </div>
         </div>

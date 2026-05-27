@@ -5,8 +5,14 @@
   <style>
     body { background-color: var(--poke-bg) !important; }
 
-    .users-container { padding-top: 3rem; padding-bottom: 3rem; }
+    .users-container { padding-top: 2.5rem; padding-bottom: 3rem; }
 
+    .page-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 1.5rem;
+    }
     .section-label {
       font-family: var(--poke-font);
       font-size: 0.6rem;
@@ -14,25 +20,17 @@
       text-transform: uppercase;
       color: var(--poke-yellow);
       background: var(--poke-dark);
-      padding: 4px 10px;
+      padding: 5px 12px;
       border: 2px solid var(--poke-yellow);
       display: inline-block;
-      margin-bottom: 8px;
+      line-height: 1.8;
     }
     .users-title {
       font-family: var(--poke-font) !important;
       color: var(--poke-dark) !important;
-      text-align: center;
-      margin-bottom: 2rem;
-      font-size: 1.2rem !important;
+      font-size: 1rem !important;
       text-shadow: 2px 2px 0 var(--poke-yellow);
-    }
-    .ash-image {
-      max-width: 100%;
-      height: auto;
-      border: var(--pixel-border);
-      box-shadow: var(--pixel-shadow);
-      image-rendering: pixelated;
+      margin: 0;
     }
     .search-form .form-select,
     .search-form .form-control {
@@ -44,24 +42,31 @@
     }
     .search-form .form-control:focus {
       border-color: var(--poke-blue) !important;
-      box-shadow: 3px 3px 0 var(--poke-blue) !important;
+      box-shadow: 2px 2px 0 var(--poke-blue) !important;
     }
+    .table-themed tbody a {
+      color: var(--poke-dark) !important;
+      font-weight: bold;
+    }
+    .table-themed tbody a:hover { color: var(--poke-red) !important; }
     .page-select {
       font-family: var(--poke-font);
-      font-size: 0.55rem;
+      font-size: 0.58rem;
       border: 2px solid var(--poke-dark);
       border-radius: 0;
       background: var(--poke-panel-alt);
-      padding: 4px 8px;
+      padding: 5px 8px;
       color: var(--poke-dark);
+      line-height: 1.8;
     }
     .page-nav-link {
       font-family: var(--poke-font);
-      font-size: 0.55rem;
-      color: var(--poke-blue) !important;
-      padding: 4px 8px;
+      font-size: 0.58rem;
+      color: var(--poke-dark) !important;
+      padding: 5px 10px;
       border: 2px solid var(--poke-dark);
       display: inline-block;
+      line-height: 1.8;
     }
     .page-nav-link:hover { background: var(--poke-yellow) !important; color: var(--poke-dark) !important; }
   </style>
@@ -69,124 +74,102 @@
 
 {% block content %}
   <div class="container users-container">
-    <div class="row">
-      <div class="col-md-4 text-center">
-        <div class="pixel-box p-3 mb-4 d-inline-block">
-          <p class="pixel-box-label">TRAINER INFO</p>
-          <img src="{{ url_for('views.themes', path='img/Ash.png') }}" alt="Ash Ketchum" class="ash-image">
-        </div>
-      </div>
-      <div class="col-md-8">
-        <div class="text-center mb-3">
-          <span class="section-label">▶ TRAINER REGISTRY</span>
-        </div>
-        <h1 class="users-title">{% trans %}Trainers{% endtrans %}</h1>
-
-        {% if q and field %}
-          <p class="text-center" style="font-family: var(--poke-font); font-size: 0.6rem; color: var(--poke-dark);">
-            {% trans %}Searching for trainers with <strong>{{ field }}</strong> matching <strong>{{ q }}</strong>{% endtrans %}
-          </p>
-          <p class="text-center" style="font-family: var(--poke-font); font-size: 0.55rem; color: var(--poke-blue);">
-            {% trans page=users.page, total=users.total %}Page {{ page }} of {{ total }} results{% endtrans %}
-          </p>
-        {% endif %}
-
-        {% with form = Forms.users.PublicUserSearchForm(field=field, q=q) %}
-          <form method="GET" class="row justify-content-around align-items-center search-form mb-3">
-            <div class="mb-3 col-md-3">
-              {{ form.field(class="form-select w-100") }}
-            </div>
-            <div class="mb-3 col-md-7">
-              {{ form.q(class="form-control w-100", placeholder="Search for a Trainer...") }}
-            </div>
-            <div class="mb-3 col-md-2">
-              <button type="submit" class="btn btn-pokemon-yellow w-100">
-                <i class="fas fa-search" aria-hidden="true"></i>
-              </button>
-            </div>
-          </form>
-        {% endwith %}
-
-        <hr>
-
-        <table class="table table-themed align-middle">
-          <thead>
-          <tr>
-            <th>{% trans %}Trainer{% endtrans %}</th>
-            <th>{% trans %}Website{% endtrans %}</th>
-            <th class="d-none d-md-table-cell">{% trans %}Affiliation{% endtrans %}</th>
-            <th class="d-none d-md-table-cell">{% trans %}Country{% endtrans %}</th>
-          </tr>
-          </thead>
-          <tbody>
-          {% for user in users.items %}
-            <tr>
-              <td>
-                {% if scores_visible() %}
-                  <a href="{{ url_for('users.public', user_id=user.id) }}">{{ user.name | truncate(50) }}</a>
-                {% else %}
-                  <span>{{ user.name | truncate(50) }}</span>
-                {% endif %}
-                {% if user.bracket_id %}
-                  <span class="badge bg-secondary ms-2">{{ user.bracket.name }}</span>
-                {% endif %}
-                {% if user.oauth_id %}
-                  <a href="https://majorleaguecyber.org/u/{{ user.name }}">
-                    <span class="badge bg-primary ms-2">{% trans %}Official{% endtrans %}</span>
-                  </a>
-                {% endif %}
-              </td>
-              <td class="text-center" style="width: 10px;">
-                {% if user.website and (user.website.startswith('http://') or user.website.startswith('https://')) %}
-                  <a href="{{ user.website }}" target="_blank" rel="noopener">
-                    <i class="fas fa-external-link-alt"></i>
-                  </a>
-                {% endif %}
-              </td>
-              <td class="d-none d-md-table-cell d-lg-table-cell">
-                {% if user.affiliation %}
-                  {% if user.affiliation | length > 50 %}
-                    <span title="{{ user.affiliation }}">{{ user.affiliation | truncate(50) }}</span>
-                  {% else %}
-                    <span>{{ user.affiliation | truncate(50) }}</span>
-                  {% endif %}
-                {% endif %}
-              </td>
-              <td class="d-none d-md-table-cell d-lg-table-cell">
-                <span>
-                  {% if user.country %}
-                    <i class="flag-{{ user.country.lower() }}"></i>
-                    {{ lookup_country_code(user.country) }}
-                  {% endif %}
-                </span>
-              </td>
-            </tr>
-          {% endfor %}
-          </tbody>
-        </table>
-
-        {% if users.pages > 1 %}
-          <div class="row">
-            <div class="col-md-12">
-              <div class="text-center" style="font-family: var(--poke-font); font-size: 0.55rem;">
-                {% trans %}Page{% endtrans %} <br>
-                {% if users.page != 1 %}
-                  <a href="{{ prev_page }}" class="page-nav-link">&lt;&lt;&lt;</a>
-                {% endif %}
-                <select class="page-select">
-                  {% for page in range(1, users.pages + 1) %}
-                    <option {% if users.page == page %}selected{% endif %}>{{ page }}</option>
-                  {% endfor %}
-                </select>
-                {% if users.next_num %}
-                  <a href="{{ next_page }}" class="page-nav-link">&gt;&gt;&gt;</a>
-                {% endif %}
-              </div>
-            </div>
-          </div>
-        {% endif %}
-      </div>
+    <div class="page-header">
+      <span class="section-label">▶ TRAINER REGISTRY</span>
+      <h1 class="users-title">{% trans %}Trainers{% endtrans %}</h1>
     </div>
+
+    {% if q and field %}
+      <p style="font-family: var(--poke-font); font-size: 0.62rem; color: var(--poke-dark); margin-bottom: 0.25rem;">
+        {% trans %}Searching for trainers with <strong>{{ field }}</strong> matching <strong>{{ q }}</strong>{% endtrans %}
+      </p>
+      <p style="font-family: var(--poke-font); font-size: 0.58rem; color: var(--poke-blue); margin-bottom: 1rem;">
+        {% trans page=users.page, total=users.total %}Page {{ page }} of {{ total }} results{% endtrans %}
+      </p>
+    {% endif %}
+
+    {% with form = Forms.users.PublicUserSearchForm(field=field, q=q) %}
+      <form method="GET" class="row align-items-end search-form mb-3">
+        <div class="mb-2 col-md-3">
+          {{ form.field(class="form-select w-100") }}
+        </div>
+        <div class="mb-2 col-md-7">
+          {{ form.q(class="form-control w-100", placeholder="Search for a Trainer...") }}
+        </div>
+        <div class="mb-2 col-md-2">
+          <button type="submit" class="btn btn-primary w-100">
+            <i class="fas fa-search" aria-hidden="true"></i>
+          </button>
+        </div>
+      </form>
+    {% endwith %}
+
+    <table class="table table-themed align-middle">
+      <thead>
+      <tr>
+        <th>{% trans %}Trainer{% endtrans %}</th>
+        <th>{% trans %}Website{% endtrans %}</th>
+        <th class="d-none d-md-table-cell">{% trans %}Affiliation{% endtrans %}</th>
+        <th class="d-none d-md-table-cell">{% trans %}Country{% endtrans %}</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for user in users.items %}
+        <tr>
+          <td>
+            {% if scores_visible() %}
+              <a href="{{ url_for('users.public', user_id=user.id) }}">{{ user.name | truncate(50) }}</a>
+            {% else %}
+              <span>{{ user.name | truncate(50) }}</span>
+            {% endif %}
+            {% if user.bracket_id %}
+              <span class="badge bg-secondary ms-2">{{ user.bracket.name }}</span>
+            {% endif %}
+            {% if user.oauth_id %}
+              <a href="https://majorleaguecyber.org/u/{{ user.name }}">
+                <span class="badge bg-primary ms-2">{% trans %}Official{% endtrans %}</span>
+              </a>
+            {% endif %}
+          </td>
+          <td class="text-center" style="width: 40px;">
+            {% if user.website and (user.website.startswith('http://') or user.website.startswith('https://')) %}
+              <a href="{{ user.website }}" target="_blank" rel="noopener">
+                <i class="fas fa-external-link-alt"></i>
+              </a>
+            {% endif %}
+          </td>
+          <td class="d-none d-md-table-cell">
+            {% if user.affiliation %}
+              <span title="{{ user.affiliation }}">{{ user.affiliation | truncate(50) }}</span>
+            {% endif %}
+          </td>
+          <td class="d-none d-md-table-cell">
+            {% if user.country %}
+              <i class="flag-{{ user.country.lower() }}"></i>
+              {{ lookup_country_code(user.country) }}
+            {% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+
+    {% if users.pages > 1 %}
+      <div class="text-center mt-3" style="font-family: var(--poke-font); font-size: 0.58rem;">
+        {% trans %}Page{% endtrans %}
+        {% if users.page != 1 %}
+          <a href="{{ prev_page }}" class="page-nav-link ms-2">&lt;&lt;&lt;</a>
+        {% endif %}
+        <select class="page-select mx-2">
+          {% for page in range(1, users.pages + 1) %}
+            <option {% if users.page == page %}selected{% endif %}>{{ page }}</option>
+          {% endfor %}
+        </select>
+        {% if users.next_num %}
+          <a href="{{ next_page }}" class="page-nav-link me-2">&gt;&gt;&gt;</a>
+        {% endif %}
+      </div>
+    {% endif %}
   </div>
 {% endblock %}
 

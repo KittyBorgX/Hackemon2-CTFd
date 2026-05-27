@@ -27,14 +27,15 @@
         background: var(--poke-dark) !important;
         color: var(--poke-yellow) !important;
         font-family: var(--poke-font) !important;
-        font-size: 0.65rem !important;
+        font-size: 0.68rem !important;
         border-color: var(--poke-yellow) !important;
         text-align: center;
         padding: 12px !important;
+        line-height: 1.8;
     }
     .hall-of-fame-table tbody tr {
         background: var(--poke-panel) !important;
-        border-bottom: 2px solid rgba(26,26,46,0.15);
+        border-bottom: 2px solid rgba(30,22,8,0.15);
     }
     .hall-of-fame-table tbody tr:nth-child(even) {
         background: var(--poke-bg) !important;
@@ -58,7 +59,7 @@
     .score-bar-inner {
         flex: 1;
         height: 10px;
-        background: rgba(26,26,46,0.15);
+        background: rgba(30,22,8,0.15);
         border: 2px solid var(--poke-dark);
         border-radius: 0;
         overflow: hidden;
@@ -73,10 +74,11 @@
     .rank-3-row .score-bar-fill { background: #cd7f32; }
     .score-value {
         font-family: var(--poke-font);
-        font-size: 0.6rem;
+        font-size: 0.65rem;
         color: var(--poke-dark);
-        min-width: 50px;
+        min-width: 54px;
         text-align: right;
+        line-height: 1.8;
     }
 
     .nav-pills .nav-link {
@@ -98,7 +100,10 @@
 {% block content %}
 <div class="jumbotron">
     <div class="container">
-        <h1>Hall of Fame</h1>
+        <div class="d-flex align-items-baseline gap-3 flex-wrap">
+            <span class="pixel-box-label" style="background: var(--poke-yellow); color: var(--poke-dark); border-color: var(--poke-dark);">▶ TRAINER RANKINGS</span>
+        </div>
+        <h1 class="mt-2">Hall of Fame</h1>
         <p class="lead">See which trainers are leading the pack!</p>
     </div>
 </div>
@@ -125,7 +130,8 @@
         </template>
 
         <div class="col-md-12" x-show="standings.length">
-            <table class="table align-middle hall-of-fame-table">
+          <div data-poke-panel="HALL OF FAME" style="border: var(--pixel-border); box-shadow: var(--pixel-shadow); overflow: hidden;">
+            <table class="table align-middle hall-of-fame-table" style="border: none; box-shadow: none; margin-bottom: 0;">
                 <thead>
                     <tr>
                         <th class="rank-col text-center">{% trans %}Rank{% endtrans %}</th>
@@ -163,13 +169,13 @@
                     </template>
                 </tbody>
             </table>
+          </div>
         </div>
 
         <div class="col-md-12" x-show="!standings.length">
-            <div class="pixel-box text-center p-4 mt-4">
-                <p class="pixel-box-label">STATUS</p>
-                <p style="font-family: var(--poke-font); font-size: 0.7rem; color: var(--poke-dark);">Scoreboard is empty</p>
-                <p style="color: var(--poke-blue);">No trainers have submitted yet!</p>
+            <div class="pixel-box text-center p-4" data-poke-panel="STATUS">
+                <p style="font-family: var(--poke-font); font-size: 0.7rem; color: var(--poke-dark); margin-bottom: 0.3rem;">Scoreboard is empty</p>
+                <p style="color: var(--poke-blue); margin: 0;">No trainers have submitted yet!</p>
             </div>
         </div>
     </div>

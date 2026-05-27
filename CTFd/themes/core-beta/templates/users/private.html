@@ -3,74 +3,83 @@
 {% block stylesheets %}
   {{ super() }}
   <style>
-    .profile-container {
-      padding-top: 3rem;
-      padding-bottom: 3rem;
-    }
+    .profile-container { padding-top: 3rem; padding-bottom: 3rem; }
+
     .profile-title {
-      color: #ffcc00;
-      text-shadow: 3px 3px 0 #2c6cb3, -1px -1px 0 #2c6cb3, 1px -1px 0 #2c6cb3, -1px 1px 0 #2c6cb3, 1px 1px 0 #2c6cb3;
+      font-family: var(--poke-font) !important;
+      color: var(--poke-dark) !important;
+      text-shadow: 2px 2px 0 var(--poke-yellow) !important;
       margin-bottom: 1rem;
-      font-size: 2.5rem;
-      font-weight: bold;
+      font-size: 1.3rem !important;
+      font-weight: normal;
     }
     .ash-image {
       max-width: 100%;
       height: auto;
-      border-radius: 15px;
-      border: 4px solid #ffcc00;
+      border: var(--pixel-border);
+      border-radius: 0 !important;
+      box-shadow: var(--pixel-shadow);
+      image-rendering: pixelated;
     }
     .profile-card {
-      background-color: rgba(44, 108, 179, 0.95);
-      color: #fff;
-      border: 4px solid #ffcc00;
-      border-radius: 15px;
+      background: var(--poke-panel);
+      color: var(--poke-dark);
+      border: var(--pixel-border);
+      border-radius: 0 !important;
+      box-shadow: var(--pixel-shadow);
       padding: 2rem;
+      position: relative;
     }
     .profile-card .badge.bg-secondary {
-        background-color: #1a3a5f !important;
-        color: #ffcc00;
+      background-color: var(--poke-dark) !important;
+      color: var(--poke-yellow) !important;
+      border-radius: 0 !important;
     }
-    .profile-card .badge.bg-primary {
-        background-color: #ffcc00 !important;
-        color: #2c6cb3;
-    }
+    .profile-card .badge.bg-primary,
     .profile-card .badge.text-bg-light {
-        background-color: #ffcc00 !important;
-        color: #2c6cb3;
+      background-color: var(--poke-yellow) !important;
+      color: var(--poke-dark) !important;
+      border-radius: 0 !important;
     }
-    .profile-card h2, .profile-card h3 {
-        color: #ffcc00;
+    .profile-card h2, .profile-card h3 { color: var(--poke-dark) !important; }
+    .profile-card a { color: var(--poke-blue) !important; }
+    .profile-card a:hover { color: var(--poke-red) !important; }
+    .profile-card hr { border-color: var(--poke-dark) !important; }
+
+    .trainer-label {
+      font-family: var(--poke-font);
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--poke-yellow);
+      background: var(--poke-dark);
+      padding: 4px 12px;
+      border: 2px solid var(--poke-yellow);
+      display: inline-block;
+      margin-bottom: 1rem;
+      line-height: 1.8;
     }
-    .profile-card a {
-        color: #ffcc00;
+
+    .stat-box {
+      border: 2px solid var(--poke-dark);
+      background: var(--poke-bg);
+      padding: 8px 16px;
+      text-align: center;
+      box-shadow: 2px 2px 0 rgba(30,22,8,0.25);
     }
-    .profile-card a:hover {
-        color: #fff;
+    .stat-box .stat-label {
+      font-family: var(--poke-font);
+      font-size: 0.55rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: rgba(30,22,8,0.65);
+      margin-bottom: 4px;
+      line-height: 1.8;
     }
-    .table-themed {
-      background-color: rgba(44, 108, 179, 0.95);
-      color: #fff;
-      border: 4px solid #ffcc00;
-      border-radius: 15px;
-      margin-top: 2rem;
-    }
-    .table-themed thead th {
-      color: #ffcc00;
-      border-bottom: 2px solid #ffcc00;
-    }
-    .table-themed tbody tr {
-      border-color: #ffcc00;
-    }
-    .table-themed tbody tr:hover {
-      background-color: rgba(60, 120, 190, 0.95);
-    }
-    .table-themed a {
-      color: #ffcc00;
-      font-weight: bold;
-    }
-    .table-themed a:hover {
-      color: #fff;
+    .stat-box .stat-value {
+      font-family: var(--poke-font);
+      font-size: 0.9rem;
+      color: var(--poke-dark);
     }
   </style>
 {% endblock %}
@@ -79,10 +88,13 @@
 <div class="container profile-container">
   <div class="row">
     <div class="col-md-4 text-center">
-      <img src="{{ url_for('views.themes', path='img/Ash.png') }}" alt="Ash Ketchum" class="ash-image mb-4">
+      <div class="trainer-avatar-box mb-4">
+        <i class="fas fa-user"></i>
+      </div>
     </div>
     <div class="col-md-8">
       <div class="profile-card">
+        <div class="trainer-label">▶ TRAINER CARD</div>
         <h1 class="profile-title">{{ user.name }}</h1>
 
         {% if user.team_id %}
@@ -137,20 +149,22 @@
         </div>
 
         {% if user.fields %}
-          <hr class="w-50 mx-auto" style="border-color: #ffcc00;">
+          <hr class="w-50 mx-auto" style="border-color: var(--poke-yellow);">
         {% endif %}
 
-        <div>
-          <h2 class="text-center">
-            {% if account.place %}
-              {{ account.place }} <small>place</small>
-            {% endif %}
-          </h2>
-          <h2 class="text-center">
-            {% if account %}
-              {{ account.get_score(admin=True) }} <small>points</small>
-            {% endif %}
-          </h2>
+        <div class="d-flex gap-3 flex-wrap mt-3">
+          {% if account.place %}
+          <div class="stat-box flex-fill">
+            <div class="stat-label">RANK</div>
+            <div class="stat-value">{{ account.place }}</div>
+          </div>
+          {% endif %}
+          {% if account %}
+          <div class="stat-box flex-fill">
+            <div class="stat-label">POINTS</div>
+            <div class="stat-value">{{ account.get_score(admin=True) }}</div>
+          </div>
+          {% endif %}
         </div>
 
         <div class="pt-3 text-center">

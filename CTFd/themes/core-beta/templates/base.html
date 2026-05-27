@@ -48,40 +48,50 @@
        "CATCH THE FLAG. HACK THE SYSTEM. BECOME THE LEGEND."
        ================================================================ */
     :root {
-      --poke-bg:        #d4c5a0;
-      --poke-panel:     #e8dcc0;
-      --poke-panel-alt: #f0e8d4;
-      --poke-dark:      #1a1a2e;
-      --poke-yellow:    #ffcc00;
-      --poke-blue:      #2c6cb3;
-      --poke-red:       #cc0000;
+      --poke-bg:        #d6c9a6;
+      --poke-panel:     #e8dfc4;
+      --poke-panel-alt: #f2ead8;
+      --poke-dark:      #1e1608;
+      --poke-yellow:    #f0a800;
+      --poke-blue:      #3a6aa0;
+      --poke-red:       #b02828;
       --poke-green:     #2d7a1f;
-      --poke-terminal:  #1a2a6c;
+      --poke-terminal:  #1a1208;
       --poke-font:      'Press Start 2P', 'Courier New', monospace;
       --poke-body:      'Lato', sans-serif;
-      --pixel-border:   3px solid #1a1a2e;
-      --pixel-shadow:   4px 4px 0 #1a1a2e;
+      --pixel-border:   2px solid #1e1608;
+      --pixel-shadow:   3px 3px 0 rgba(30,22,8,0.4);
     }
 
     *, *::before, *::after { box-sizing: border-box; }
 
     html, body {
       background-color: var(--poke-bg) !important;
+      background-image:
+        repeating-linear-gradient(0deg,   rgba(30,22,8,0.02) 0px, rgba(30,22,8,0.02) 1px, transparent 1px, transparent 16px),
+        repeating-linear-gradient(90deg,  rgba(30,22,8,0.02) 0px, rgba(30,22,8,0.02) 1px, transparent 1px, transparent 16px) !important;
       color: var(--poke-dark) !important;
       font-family: var(--poke-body) !important;
+      font-size: 1rem;
+      line-height: 1.6;
       min-height: 100vh;
+    }
+
+    ::selection {
+      background: var(--poke-yellow);
+      color: var(--poke-dark);
     }
 
     h1, h2, h3 {
       font-family: var(--poke-font) !important;
       font-weight: normal;
       letter-spacing: 1px;
-      line-height: 1.6;
+      line-height: 1.8;
     }
-    h1 { font-size: 1.3rem !important; }
-    h2 { font-size: 1rem !important; }
-    h3 { font-size: 0.85rem !important; }
-    h4, h5, h6 { font-family: var(--poke-font); font-size: 0.75rem; }
+    h1 { font-size: 1.1rem !important; }
+    h2 { font-size: 0.85rem !important; }
+    h3 { font-size: 0.75rem !important; }
+    h4, h5, h6 { font-family: var(--poke-font); font-size: 0.65rem; line-height: 1.8; }
 
     a { color: var(--poke-blue) !important; text-decoration: none !important; }
     a:hover { color: var(--poke-red) !important; }
@@ -89,10 +99,10 @@
     /* ---- NAVBAR ---- */
     .navbar {
       background-color: var(--poke-dark) !important;
-      border-bottom: 4px solid var(--poke-yellow);
-      padding: 4px 0;
+      border-bottom: 3px solid var(--poke-yellow);
+      padding: 6px 0;
       min-height: 54px;
-      box-shadow: 0 4px 0 rgba(0,0,0,0.3);
+      box-shadow: 0 3px 0 rgba(0,0,0,0.25);
     }
     .navbar > .container {
       max-width: 100%;
@@ -106,7 +116,7 @@
     .navbar-brand {
       color: var(--poke-yellow) !important;
       font-family: var(--poke-font) !important;
-      font-size: 0.8rem !important;
+      font-size: 0.75rem !important;
       letter-spacing: 2px;
       padding: 4px 8px;
       text-shadow: 2px 2px 0 var(--poke-blue);
@@ -121,11 +131,11 @@
     .navbar-dark .navbar-nav .nav-link {
       color: var(--poke-yellow) !important;
       font-family: var(--poke-font) !important;
-      font-size: 0.5rem !important;
+      font-size: 0.6rem !important;
       border: 2px solid var(--poke-yellow);
       border-radius: 0 !important;
-      margin: 4px 2px;
-      padding: 6px 10px !important;
+      margin: 4px 3px;
+      padding: 7px 12px !important;
       text-transform: uppercase;
       transition: background 0.1s, color 0.1s;
       letter-spacing: 0.5px;
@@ -151,16 +161,16 @@
     /* ---- FOOTER TERMINAL ---- */
     .footer {
       background-color: var(--poke-terminal) !important;
-      border-top: 4px solid var(--poke-yellow);
+      border-top: 3px solid var(--poke-yellow);
       color: var(--poke-yellow) !important;
       font-family: var(--poke-font) !important;
-      font-size: 0.55rem;
-      padding: 10px 0;
+      font-size: 0.6rem;
+      padding: 12px 0;
     }
     .footer a, .footer .text-muted, .footer small {
-      color: rgba(255,204,0,0.6) !important;
+      color: rgba(255,204,0,0.7) !important;
       font-family: var(--poke-font) !important;
-      font-size: 0.45rem !important;
+      font-size: 0.52rem !important;
     }
     .terminal-prompt { color: #88ff88; font-family: var(--poke-font); }
     .terminal-text   { color: var(--poke-yellow); font-family: var(--poke-font); }
@@ -177,6 +187,29 @@
       margin-left: 2px;
     }
 
+    /* ---- PANEL LABEL UTILITY ---- */
+    [data-poke-panel] {
+      position: relative;
+      margin-top: 1.8rem;
+    }
+    [data-poke-panel]::before {
+      content: '▶ ' attr(data-poke-panel);
+      font-family: var(--poke-font);
+      font-size: 0.55rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--poke-yellow);
+      background: var(--poke-dark);
+      padding: 4px 10px;
+      border: 2px solid var(--poke-yellow);
+      position: absolute;
+      top: -16px;
+      left: 8px;
+      white-space: nowrap;
+      z-index: 1;
+      line-height: 1.8;
+    }
+
     /* ---- PIXEL UTILITY ---- */
     .pixel-box {
       border: var(--pixel-border);
@@ -186,15 +219,16 @@
     }
     .pixel-box-label {
       font-family: var(--poke-font);
-      font-size: 0.6rem;
+      font-size: 0.62rem;
       text-transform: uppercase;
       color: var(--poke-dark);
-      padding: 3px 10px;
+      padding: 4px 12px;
       background: var(--poke-bg);
       border: 2px solid var(--poke-dark);
       display: inline-block;
       margin-bottom: 6px;
       letter-spacing: 1px;
+      line-height: 1.8;
     }
     .hp-bar {
       height: 12px;
@@ -212,10 +246,24 @@
     .hp-bar-fill.medium { background: #c8c840; }
     .hp-bar-fill.low    { background: #c84040; }
 
+    /* ---- TRAINER AVATAR (replaces missing Ash.png) ---- */
+    .trainer-avatar-box {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 130px;
+      height: 130px;
+      background: var(--poke-panel);
+      border: var(--pixel-border);
+      box-shadow: var(--pixel-shadow);
+      color: var(--poke-dark);
+      font-size: 3.5rem;
+    }
+
     /* ---- JUMBOTRON ---- */
     .jumbotron {
       background: var(--poke-dark) !important;
-      border-bottom: 4px solid var(--poke-yellow);
+      border-bottom: 3px solid var(--poke-yellow);
       color: var(--poke-yellow) !important;
       border-radius: 0 !important;
       padding: 2rem 1rem;
@@ -223,11 +271,12 @@
     .jumbotron h1, .jumbotron .h1 {
       font-family: var(--poke-font) !important;
       color: var(--poke-yellow) !important;
-      text-shadow: 3px 3px 0 var(--poke-blue);
+      text-shadow: 2px 2px 0 var(--poke-blue);
     }
     .jumbotron p, .jumbotron .lead {
       color: rgba(255,255,255,0.9) !important;
-      font-size: 0.9rem !important;
+      font-size: 1rem !important;
+      font-family: var(--poke-body) !important;
     }
 
     /* ---- CARDS ---- */
@@ -241,11 +290,12 @@
       background: var(--poke-dark) !important;
       color: var(--poke-yellow) !important;
       font-family: var(--poke-font) !important;
-      font-size: 0.65rem !important;
-      border-bottom: 3px solid var(--poke-yellow) !important;
+      font-size: 0.68rem !important;
+      border-bottom: 2px solid var(--poke-yellow) !important;
       border-radius: 0 !important;
       padding: 10px 14px !important;
       letter-spacing: 1px;
+      line-height: 1.8;
     }
     .card-body { color: var(--poke-dark) !important; }
 
@@ -253,16 +303,17 @@
     .btn {
       border-radius: 0 !important;
       font-family: var(--poke-font) !important;
-      font-size: 0.6rem !important;
+      font-size: 0.62rem !important;
       text-transform: uppercase;
       letter-spacing: 0.5px;
+      line-height: 1.8;
     }
     .btn-pokemon-yellow,
     .btn-primary {
       background-color: var(--poke-yellow) !important;
       color: var(--poke-dark) !important;
-      border: 3px solid var(--poke-dark) !important;
-      box-shadow: 4px 4px 0 var(--poke-dark) !important;
+      border: 2px solid var(--poke-dark) !important;
+      box-shadow: 3px 3px 0 rgba(30,22,8,0.45) !important;
       padding: 8px 20px !important;
       transition: transform 0.1s, box-shadow 0.1s !important;
     }
@@ -271,28 +322,28 @@
       color: var(--poke-red) !important;
       border-color: var(--poke-red) !important;
       transform: translate(2px, 2px) !important;
-      box-shadow: 2px 2px 0 var(--poke-dark) !important;
+      box-shadow: 1px 1px 0 rgba(30,22,8,0.45) !important;
     }
     .btn-pokemon-yellow:active, .btn-primary:active {
-      transform: translate(4px, 4px) !important;
+      transform: translate(3px, 3px) !important;
       box-shadow: none !important;
     }
     .btn-secondary {
       background-color: var(--poke-blue) !important;
       color: #fff !important;
-      border: 3px solid var(--poke-dark) !important;
-      box-shadow: 4px 4px 0 var(--poke-dark) !important;
+      border: 2px solid var(--poke-dark) !important;
+      box-shadow: 3px 3px 0 rgba(30,22,8,0.45) !important;
     }
     .btn-secondary:hover {
       background-color: #1a4a8c !important;
       transform: translate(2px, 2px) !important;
-      box-shadow: 2px 2px 0 var(--poke-dark) !important;
+      box-shadow: 1px 1px 0 rgba(30,22,8,0.45) !important;
     }
     .btn-danger {
       background-color: var(--poke-red) !important;
       color: #fff !important;
-      border: 3px solid var(--poke-dark) !important;
-      box-shadow: 4px 4px 0 var(--poke-dark) !important;
+      border: 2px solid var(--poke-dark) !important;
+      box-shadow: 3px 3px 0 rgba(30,22,8,0.45) !important;
     }
     .btn-outline-secondary {
       border-color: var(--poke-dark) !important;
@@ -312,15 +363,16 @@
       background: var(--poke-dark) !important;
       color: var(--poke-yellow) !important;
       font-family: var(--poke-font) !important;
-      font-size: 0.6rem !important;
+      font-size: 0.62rem !important;
       border-color: var(--poke-yellow) !important;
       padding: 10px 12px !important;
       letter-spacing: 1px;
+      line-height: 1.8;
     }
     .table tbody tr { background: var(--poke-panel) !important; }
     .table tbody tr:nth-child(even) { background: var(--poke-bg) !important; }
-    .table tbody tr:hover { background: rgba(255,204,0,0.25) !important; }
-    .table td, .table th { border-color: rgba(26,26,46,0.3) !important; }
+    .table tbody tr:hover { background: rgba(255,204,0,0.2) !important; }
+    .table td, .table th { border-color: rgba(30,22,8,0.18) !important; }
     .table a { color: var(--poke-blue) !important; }
     .table a:hover { color: var(--poke-red) !important; }
 
@@ -339,7 +391,7 @@
     }
     .table-themed tbody tr { background: var(--poke-panel) !important; color: var(--poke-dark) !important; }
     .table-themed tbody tr:nth-child(even) { background: var(--poke-bg) !important; }
-    .table-themed tbody tr:hover { background: rgba(255,204,0,0.25) !important; }
+    .table-themed tbody tr:hover { background: rgba(255,204,0,0.2) !important; }
     .table-themed a { color: var(--poke-blue) !important; font-weight: bold; }
     .table-themed a:hover { color: var(--poke-red) !important; }
     .table-themed .badge.bg-secondary {
@@ -358,13 +410,14 @@
       background: var(--poke-panel-alt) !important;
       color: var(--poke-dark) !important;
       font-family: 'Courier New', monospace !important;
-      box-shadow: 3px 3px 0 rgba(26,26,46,0.2) !important;
+      font-size: 0.95rem !important;
+      box-shadow: 2px 2px 0 rgba(30,22,8,0.12) !important;
       padding: 0.5rem 0.75rem !important;
       height: auto !important;
     }
     .form-control:focus {
       border-color: var(--poke-blue) !important;
-      box-shadow: 3px 3px 0 var(--poke-blue) !important;
+      box-shadow: 2px 2px 0 var(--poke-blue) !important;
       outline: none !important;
     }
     .form-select {
@@ -372,26 +425,28 @@
       border-radius: 0 !important;
       background-color: var(--poke-panel-alt) !important;
       color: var(--poke-dark) !important;
-      box-shadow: 3px 3px 0 rgba(26,26,46,0.2) !important;
+      font-size: 0.95rem !important;
+      box-shadow: 2px 2px 0 rgba(30,22,8,0.12) !important;
       height: auto !important;
       padding: 0.5rem 0.75rem !important;
     }
     .form-label {
       font-family: var(--poke-font) !important;
-      font-size: 0.6rem !important;
+      font-size: 0.62rem !important;
       color: var(--poke-dark) !important;
       text-transform: uppercase;
       letter-spacing: 1px;
+      line-height: 2;
     }
-    .form-text { color: var(--poke-blue) !important; font-size: 0.75rem !important; }
+    .form-text { color: var(--poke-blue) !important; font-size: 0.85rem !important; }
 
     /* ---- ALERTS ---- */
     .alert {
       border-radius: 0 !important;
-      border-width: 3px !important;
-      font-size: 0.85rem !important;
+      border-width: 2px !important;
+      font-size: 0.9rem !important;
     }
-    .alert strong { font-family: var(--poke-font) !important; font-size: 0.7rem !important; }
+    .alert strong { font-family: var(--poke-font) !important; font-size: 0.65rem !important; line-height: 2; }
     .alert-success {
       background: #d4edda !important;
       border-color: #28a745 !important;
@@ -417,7 +472,8 @@
     .badge {
       border-radius: 0 !important;
       font-family: var(--poke-font) !important;
-      font-size: 0.45rem !important;
+      font-size: 0.55rem !important;
+      line-height: 1.8;
     }
     .bg-primary   { background-color: var(--poke-blue) !important; }
     .bg-danger    { background-color: var(--poke-red) !important; }
@@ -429,13 +485,13 @@
     .modal-content {
       border: var(--pixel-border) !important;
       border-radius: 0 !important;
-      box-shadow: 8px 8px 0 var(--poke-dark) !important;
+      box-shadow: 6px 6px 0 rgba(30,22,8,0.45) !important;
       background: var(--poke-panel) !important;
     }
     .modal-header {
       background: var(--poke-dark) !important;
       color: var(--poke-yellow) !important;
-      border-bottom: 3px solid var(--poke-yellow) !important;
+      border-bottom: 2px solid var(--poke-yellow) !important;
       border-radius: 0 !important;
     }
     .modal-body {
@@ -449,17 +505,19 @@
     .modal-title {
       font-family: var(--poke-font) !important;
       color: var(--poke-yellow) !important;
-      font-size: 0.8rem !important;
+      font-size: 0.78rem !important;
+      line-height: 1.8;
     }
 
     /* ---- NAV TABS ---- */
-    .nav-tabs { border-bottom: 3px solid var(--poke-dark) !important; }
+    .nav-tabs { border-bottom: 2px solid var(--poke-dark) !important; }
     .nav-tabs .nav-link {
       border-radius: 0 !important;
       font-family: var(--poke-font) !important;
-      font-size: 0.55rem !important;
+      font-size: 0.6rem !important;
       color: var(--poke-dark) !important;
       border: 2px solid transparent !important;
+      line-height: 1.8;
     }
     .nav-tabs .nav-link.active {
       background: var(--poke-dark) !important;
@@ -472,34 +530,36 @@
     .nav-pills .nav-link {
       border-radius: 0 !important;
       font-family: var(--poke-font) !important;
-      font-size: 0.55rem !important;
+      font-size: 0.6rem !important;
       color: var(--poke-dark) !important;
       border: 2px solid var(--poke-dark) !important;
       margin-bottom: 4px;
       background: var(--poke-panel) !important;
+      line-height: 1.8;
     }
     .nav-pills .nav-link.active {
       background: var(--poke-dark) !important;
       color: var(--poke-yellow) !important;
     }
-    .nav-pills .nav-link:hover { background: rgba(26,26,46,0.15) !important; }
+    .nav-pills .nav-link:hover { background: rgba(30,22,8,0.1) !important; }
 
     /* ---- HR ---- */
-    hr { border-color: var(--poke-dark) !important; border-width: 2px !important; opacity: 0.4; }
+    hr { border-color: var(--poke-dark) !important; border-width: 1px !important; opacity: 0.3; }
 
     /* ---- DROPDOWN ---- */
     .dropdown-menu {
       border: var(--pixel-border) !important;
       border-radius: 0 !important;
       background: var(--poke-panel) !important;
-      box-shadow: 4px 4px 0 var(--poke-dark) !important;
+      box-shadow: 3px 3px 0 rgba(30,22,8,0.4) !important;
       padding: 4px 0 !important;
     }
     .dropdown-item {
       font-family: var(--poke-font) !important;
-      font-size: 0.55rem !important;
+      font-size: 0.6rem !important;
       color: var(--poke-dark) !important;
-      padding: 8px 14px !important;
+      padding: 9px 14px !important;
+      line-height: 1.8;
     }
     .dropdown-item:hover {
       background: var(--poke-yellow) !important;
@@ -524,13 +584,14 @@
 
     /* ---- MISC ---- */
     code, pre {
-      background: rgba(26,26,46,0.08) !important;
-      border: 1px solid rgba(26,26,46,0.2) !important;
+      background: rgba(30,22,8,0.05) !important;
+      border: 1px solid rgba(30,22,8,0.12) !important;
       color: var(--poke-dark) !important;
       border-radius: 0 !important;
+      font-size: 0.9rem !important;
     }
     blockquote {
-      border-left: 4px solid var(--poke-yellow);
+      border-left: 3px solid var(--poke-yellow);
       padding-left: 15px;
       color: var(--poke-dark);
     }
@@ -561,15 +622,9 @@
       font-family: var(--poke-font) !important;
       color: var(--poke-dark) !important;
       text-shadow: 2px 2px 0 var(--poke-yellow) !important;
-      font-size: 1.3rem !important;
+      font-size: 1.1rem !important;
       font-weight: normal !important;
-    }
-
-    /* ---- IMAGE BORDERS ---- */
-    .ash-image {
-      border: var(--pixel-border) !important;
-      border-radius: 0 !important;
-      box-shadow: var(--pixel-shadow) !important;
+      line-height: 1.8;
     }
 
     /* ---- GRAPH CONTAINERS ---- */
@@ -578,7 +633,7 @@
     }
 
     /* ---- TEXT COLOR HELPERS ---- */
-    .text-muted { color: rgba(26,26,46,0.5) !important; }
+    .text-muted { color: rgba(30,22,8,0.55) !important; }
     .text-secondary { color: var(--poke-blue) !important; }
   </style>
 </head>

@@ -17,14 +17,28 @@
     }
     .jumbotron p { color: rgba(255,255,255,0.9) !important; }
 
-    .category-header h3 {
-        font-family: var(--poke-font) !important;
-        color: var(--poke-dark) !important;
-        border-bottom: 3px solid var(--poke-dark);
-        display: inline-block;
-        padding-bottom: 4px;
-        font-size: 0.85rem !important;
+    .category-header { margin-bottom: 1.2rem; }
+    .category-label-box {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--poke-dark);
+        border: 2px solid var(--poke-dark);
+        box-shadow: 3px 3px 0 rgba(30,22,8,0.3);
+        padding: 5px 16px;
     }
+    .category-label-box h3 {
+        font-family: var(--poke-font) !important;
+        color: var(--poke-yellow) !important;
+        font-size: 0.7rem !important;
+        margin: 0 !important;
+        letter-spacing: 2px;
+        line-height: 1.8;
+        text-shadow: 1px 1px 0 var(--poke-blue);
+        border-bottom: none !important;
+        padding: 0 !important;
+    }
+    .category-bullet { color: var(--poke-red); font-size: 0.75rem; }
 
     .challenge-card {
         background: var(--poke-panel);
@@ -38,30 +52,40 @@
         box-shadow: var(--pixel-shadow);
         color: var(--poke-dark);
     }
+    .challenge-card::before {
+        content: '';
+        display: block;
+        height: 6px;
+        background: var(--poke-yellow);
+        border-bottom: 1px solid rgba(30,22,8,0.2);
+        flex-shrink: 0;
+    }
     .challenge-card:hover {
         transform: translate(-2px, -2px);
-        box-shadow: 6px 6px 0 var(--poke-dark);
+        box-shadow: 5px 5px 0 rgba(30,22,8,0.4);
         border-color: var(--poke-red);
     }
     .challenge-card.challenge-solved {
-        border-color: var(--poke-yellow);
-        box-shadow: 4px 4px 0 var(--poke-yellow);
+        border-color: var(--poke-green);
+        box-shadow: 3px 3px 0 rgba(30,22,8,0.3);
     }
+    .challenge-card.challenge-solved::before { background: var(--poke-green); }
 
     .challenge-inner { padding: 1.2rem; }
 
     .challenge-card-title {
         font-family: var(--poke-font) !important;
-        font-size: 0.65rem !important;
+        font-size: 0.68rem !important;
         color: var(--poke-dark);
         margin-bottom: 0.5rem;
-        line-height: 1.6;
+        line-height: 1.8;
     }
     .challenge-card-cp {
         font-family: var(--poke-font) !important;
-        font-size: 0.75rem !important;
+        font-size: 0.72rem !important;
         color: var(--poke-red);
         margin-bottom: 0.3rem;
+        line-height: 1.8;
     }
 
     .pokemon-sprite-container { margin-top: 0.5rem; }
@@ -76,7 +100,7 @@
     .solved-overlay {
         position: absolute;
         top: 0; left: 0; right: 0; bottom: 0;
-        background: rgba(26,26,46,0.88);
+        background: rgba(30,22,8,0.88);
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -91,11 +115,25 @@
     .challenge-solved .solved-overlay { opacity: 1; }
 
     .pokeball-icon {
-        width: 48px;
-        height: 48px;
-        background: url('{{ url_for("views.themes", path="img/Poke_Ball..png") }}') center/contain no-repeat;
-        margin-bottom: 0.5rem;
-        image-rendering: pixelated;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: linear-gradient(180deg, var(--poke-red) 50%, var(--poke-panel) 50%);
+        border: 3px solid var(--poke-dark);
+        box-shadow: 0 0 0 3px var(--poke-panel), 0 0 0 5px var(--poke-dark);
+        margin-bottom: 0.75rem;
+        position: relative;
+        flex-shrink: 0;
+    }
+    .pokeball-icon::after {
+        content: '';
+        position: absolute;
+        left: 50%; top: 50%;
+        transform: translate(-50%, -50%);
+        width: 12px; height: 12px;
+        border-radius: 50%;
+        background: var(--poke-panel);
+        border: 3px solid var(--poke-dark);
     }
     @keyframes pokeball-wobble {
         0%, 100% { transform: rotate(0deg); }
@@ -109,7 +147,10 @@
 {% block content %}
 <div class="jumbotron">
     <div class="container">
-        <h1>Challenge Arena</h1>
+        <div class="d-flex align-items-baseline gap-3 flex-wrap">
+            <span class="pixel-box-label" style="background: var(--poke-red); color: #fff; border-color: #fff;">▶ CHALLENGE ARENA</span>
+        </div>
+        <h1 class="mt-2">Challenge Arena</h1>
         <p class="lead">Prove your skills and become the HACKEMON Master!</p>
     </div>
 </div>
@@ -136,7 +177,10 @@
             <template x-for="(category, idx) in getCategories()" :key="idx">
                 <div class="pt-5">
                     <div class="category-header mb-3">
-                        <h3 x-text="category"></h3>
+                        <div class="category-label-box">
+                            <span class="category-bullet">■</span>
+                            <h3 x-text="category"></h3>
+                        </div>
                     </div>
                     <div class="challenges-row row">
                         <template x-for="c in getChallenges(category)" :key="c.id">

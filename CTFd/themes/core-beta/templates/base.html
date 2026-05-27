@@ -75,6 +75,7 @@
       font-size: 1rem;
       line-height: 1.6;
       min-height: 100vh;
+      padding-top: 53px !important;
     }
 
     ::selection {
@@ -96,67 +97,138 @@
     a { color: var(--poke-blue) !important; text-decoration: none !important; }
     a:hover { color: var(--poke-red) !important; }
 
-    /* ---- NAVBAR ---- */
-    .navbar {
-      background-color: var(--poke-dark) !important;
+    /* ---- TOP BAR ---- */
+    .poke-topbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 50px;
+      z-index: 1040;
+      background: var(--poke-dark);
       border-bottom: 3px solid var(--poke-yellow);
-      padding: 6px 0;
-      min-height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1rem;
       box-shadow: 0 3px 0 rgba(0,0,0,0.25);
     }
-    .navbar > .container {
-      max-width: 100%;
-      padding: 0 1rem;
-      margin: 0;
+    .poke-topbar-brand {
+      color: var(--poke-yellow) !important;
+      font-family: var(--poke-font) !important;
+      font-size: 0.7rem !important;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 0 var(--poke-blue);
+      text-decoration: none !important;
+    }
+    .poke-topbar-brand img.ctf_logo {
+      height: 24px; width: auto; image-rendering: pixelated;
+    }
+    .poke-menu-btn {
+      background: none;
+      border: 2px solid var(--poke-yellow);
+      border-radius: 0;
+      color: var(--poke-yellow);
+      font-family: var(--poke-font);
+      font-size: 0.52rem;
+      padding: 6px 14px;
+      cursor: pointer;
+      letter-spacing: 1px;
+      line-height: 1.8;
+      transition: background 0.1s, color 0.1s;
+    }
+    .poke-menu-btn:hover { background: var(--poke-yellow); color: var(--poke-dark); }
+
+    /* ---- SIDEBAR ---- */
+    .poke-sidebar {
+      position: fixed;
+      top: 0; left: 0;
+      width: 240px;
+      height: 100vh;
+      background: var(--poke-dark);
+      border-right: 3px solid var(--poke-yellow);
+      z-index: 1050;
+      transform: translateX(-100%);
+      transition: transform 0.22s ease;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+    .poke-sidebar.open { transform: translateX(0); }
+
+    .poke-sidebar-header {
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(240,168,0,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+      min-height: 53px;
+    }
+    .poke-sidebar-close {
+      background: none;
+      border: 1px solid rgba(240,168,0,0.35);
+      color: rgba(240,168,0,0.65);
+      font-size: 0.85rem;
+      cursor: pointer;
+      padding: 3px 7px;
+      line-height: 1;
+      transition: all 0.1s;
+    }
+    .poke-sidebar-close:hover { border-color: var(--poke-yellow); color: var(--poke-yellow); }
+
+    .poke-sidebar-nav { padding: 0.5rem 0; flex: 1; }
+
+    .poke-sidebar-link {
+      display: flex !important;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 18px;
+      color: rgba(240,168,0,0.65) !important;
+      font-family: var(--poke-font) !important;
+      font-size: 0.52rem !important;
+      text-decoration: none !important;
+      border-left: 3px solid transparent;
+      transition: all 0.1s;
+      line-height: 1.8;
+      letter-spacing: 0.5px;
       width: 100%;
     }
-    .navbar-collapse { justify-content: flex-end !important; flex-grow: 0; }
-    .navbar-nav { margin-left: auto; }
-
-    .navbar-brand {
+    .poke-sidebar-link:hover {
       color: var(--poke-yellow) !important;
-      font-family: var(--poke-font) !important;
-      font-size: 0.75rem !important;
-      letter-spacing: 2px;
-      padding: 4px 8px;
-      text-shadow: 2px 2px 0 var(--poke-blue);
-      margin-right: 0;
+      background: rgba(240,168,0,0.08);
+      border-left-color: var(--poke-yellow);
     }
-    .navbar-brand img.ctf_logo {
-      height: 28px;
-      width: auto;
-      image-rendering: pixelated;
+    .poke-sidebar-link i { width: 14px; text-align: center; font-size: 0.7rem; opacity: 0.8; }
+    .poke-sidebar-logout { background: none; border: none; text-align: left; cursor: pointer; }
+
+    .poke-sidebar-divider {
+      border: none;
+      border-top: 1px solid rgba(240,168,0,0.12);
+      margin: 0.4rem 1rem;
+    }
+    .poke-sidebar-footer {
+      padding: 10px 18px;
+      border-top: 1px solid rgba(240,168,0,0.12);
+      font-family: var(--poke-font);
+      font-size: 0.42rem;
+      color: rgba(240,168,0,0.3);
+      letter-spacing: 1px;
+      line-height: 1.8;
+      flex-shrink: 0;
     }
 
-    .navbar-dark .navbar-nav .nav-link {
-      color: var(--poke-yellow) !important;
-      font-family: var(--poke-font) !important;
-      font-size: 0.6rem !important;
-      border: 2px solid var(--poke-yellow);
-      border-radius: 0 !important;
-      margin: 4px 3px;
-      padding: 7px 12px !important;
-      text-transform: uppercase;
-      transition: background 0.1s, color 0.1s;
-      letter-spacing: 0.5px;
+    /* ---- OVERLAY ---- */
+    .poke-sidebar-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      z-index: 1045;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.22s ease;
     }
-    .navbar-dark .navbar-nav .nav-link:hover,
-    .navbar-dark .navbar-nav .nav-link:focus {
-      background-color: var(--poke-yellow) !important;
-      color: var(--poke-dark) !important;
-    }
-    .navbar-toggler {
-      border: 2px solid var(--poke-yellow) !important;
-      border-radius: 0 !important;
-    }
-    .navbar-toggler-icon {
-      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255,204,0,1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
-    }
-    .badge-notification {
-      vertical-align: top;
-      margin-left: -1.5em;
-      font-size: 50%;
-    }
+    .poke-sidebar-overlay.open { opacity: 1; pointer-events: all; }
+
+    .badge-notification { vertical-align: middle; font-size: 50%; }
 
     /* ---- FOOTER TERMINAL ---- */
     .footer {

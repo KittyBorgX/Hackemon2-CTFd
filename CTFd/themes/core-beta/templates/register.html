@@ -3,102 +3,67 @@
 {% block stylesheets %}
   {{ super() }}
   <style>
-    body {
-        background-color: #000;
-    }
-    .register-hero {
-      background: url('{{ url_for("views.themes", path="img/Banner.png") }}') no-repeat center bottom fixed;
-      background-size: cover;
+    body { background-color: var(--poke-bg) !important; }
+
+    .register-wrap {
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 50px 15px;
-      background-position-y: bottom;
+      padding: 70px 15px 30px;
+      background: url('{{ url_for("views.themes", path="img/Banner.png") }}') no-repeat center bottom / cover;
+      position: relative;
     }
-    .register-container {
-      background: rgba(44, 108, 179, 0.95);
-      border-radius: 15px;
-      padding: 2rem 3rem;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
-      max-width: 600px;
+    .register-wrap::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 1;
+    }
+    .register-panel {
+      background: var(--poke-panel);
+      border: var(--pixel-border);
+      box-shadow: var(--pixel-shadow);
+      padding: 2.5rem 2.5rem;
+      max-width: 520px;
       width: 100%;
-      margin: 0 auto;
-      border: 4px solid #ffcc00;
       position: relative;
       z-index: 2;
     }
-    .register-hero::before {
-      content: '';
+    .register-panel::before {
+      content: '▶ NEW TRAINER';
+      font-family: var(--poke-font);
+      font-size: 0.55rem;
+      letter-spacing: 2px;
+      color: var(--poke-yellow);
+      background: var(--poke-dark);
+      padding: 4px 12px;
+      border: 2px solid var(--poke-yellow);
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.1);
-      z-index: 1;
+      top: -15px;
+      left: 12px;
     }
     .register-title {
-      color: #ffcc00;
-      text-shadow: 3px 3px 0 #1a3a5f, -1px -1px 0 #1a3a5f, 1px -1px 0 #1a3a5f, -1px 1px 0 #1a3a5f, 1px 1px 0 #1a3a5f;
+      font-family: var(--poke-font) !important;
+      color: var(--poke-dark) !important;
       text-align: center;
-      margin-bottom: 2rem;
-      font-size: 2.5rem;
-      font-weight: bold;
-    }
-    .form-label {
-      font-weight: bold;
-      color: #ffcc00;
-      font-size: 1.1rem;
-    }
-    .form-control, 
-    .form-control:focus, 
-    .form-control:active,
-    .form-control:focus-visible {
-      background-color: rgba(255, 255, 255, 0.9) !important;
-      border: 3px solid #ffcc00 !important;
-      border-radius: 8px !important;
-      color: #2c6cb3 !important;
-      font-weight: bold !important;
-      box-shadow: none !important;
-    }
-    .form-control:focus {
-      background-color: white !important;
-      border-color: #ffcc00 !important;
-      box-shadow: 0 0 0 0.25rem rgba(255, 204, 0, 0.25) !important;
-    }
-    .btn-pokemon-yellow {
-      background-color: #ffcc00;
-      color: #2c6cb3;
-      border: 3px solid #2c6cb3;
-      padding: 0.8rem 2rem;
-      font-size: 1.2rem;
-      border-radius: 30px;
-      font-weight: bold;
-      text-transform: uppercase;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 0 #d4a900;
-    }
-    .btn-pokemon-yellow:hover {
-      background-color: #ffd633;
-      color: #ff0000;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 0 #d4a900;
+      margin-bottom: 1.8rem;
+      font-size: 1.1rem !important;
+      letter-spacing: 2px;
     }
   </style>
 {% endblock %}
 
 {% block content %}
-<div class="register-hero">
-  <div class="register-container">
-    <h1 class="register-title">
-      {% trans %}Register{% endtrans %}
-    </h1>
-    
+<div class="register-wrap">
+  <div class="register-panel">
+    <h1 class="register-title">{% trans %}Register{% endtrans %}</h1>
+
     {% include "components/errors.html" %}
 
     {% if integrations.mlc() %}
-      <a class="btn btn-secondary btn-lg btn-block w-100" href="{{ url_for('auth.oauth_login') }}">
+      <a class="btn btn-secondary btn-lg btn-block w-100 mb-3" href="{{ url_for('auth.oauth_login') }}">
         Login with Major League Cyber
       </a>
       <hr>
@@ -110,19 +75,19 @@
         <div class="mb-3">
           <b>{{ form.name.label(class="form-label") }}</b>
           {{ form.name(class="form-control", value=name, autocomplete="username") }}
-          <small class="form-text" style="color: #ffcc00;">{% trans %}Your username on the site{% endtrans %}</small>
+          <small class="form-text">{% trans %}Your username on the site{% endtrans %}</small>
         </div>
 
         <div class="mb-3">
           <b>{{ form.email.label(class="form-label") }}</b>
           {{ form.email(class="form-control", value=email, autocomplete="email") }}
-          <small class="form-text" style="color: #ffcc00;">{% trans %}Never shown to the public{% endtrans %}</small>
+          <small class="form-text">{% trans %}Never shown to the public{% endtrans %}</small>
         </div>
 
         <div class="mb-3">
           <b>{{ form.password.label(class="form-label") }}</b>
           {{ form.password(class="form-control", value=password, autocomplete="new-password") }}
-          <small class="form-text" style="color: #ffcc00;">{% trans %}Password used to log into your account{% endtrans %}</small>
+          <small class="form-text">{% trans %}Password used to log into your account{% endtrans %}</small>
         </div>
 
         {{ form.nonce() }}
@@ -137,7 +102,7 @@
         {% if Configs.tos_or_privacy %}
           <div class="row pt-3">
             <div class="col-md-12 text-center">
-              <small class="text-center" style="color: #ffcc00;">
+              <small class="text-center form-text">
                 {% trans trimmed privacy_link=Configs.privacy_link, tos_link=Configs.tos_link %}
                 By registering, you agree to the
                 <a href="{{ privacy_link }}" target="_blank">privacy policy</a>

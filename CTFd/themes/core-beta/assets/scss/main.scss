@@ -1,5 +1,14 @@
 @use "bootstrap/scss/bootstrap" as * with (
-  $info: #5c728f
+  $primary:      #2c6cb3,
+  $warning:      #ffcc00,
+  $danger:       #cc0000,
+  $info:         #5c728f,
+  $body-bg:      #d4c5a0,
+  $body-color:   #1a1a2e,
+  $border-radius:    0,
+  $border-radius-sm: 0,
+  $border-radius-lg: 0,
+  $border-radius-xl: 0
 );
 
 @use "includes/components/table";
@@ -17,23 +26,49 @@
 @use "includes/icons/award-icons";
 @use "includes/icons/flag-icons";
 
-h1,
-h2 {
-  font-weight: 500;
-  letter-spacing: 2px;
+/* ================================================================
+   HACKEMON 2.0 — Parchment Pixel Theme (SCSS layer)
+   Primary overrides live in base.html inline <style>;
+   these provide durability after a yarn build.
+   ================================================================ */
+
+:root {
+  --poke-bg:        #d4c5a0;
+  --poke-panel:     #e8dcc0;
+  --poke-panel-alt: #f0e8d4;
+  --poke-dark:      #1a1a2e;
+  --poke-yellow:    #ffcc00;
+  --poke-blue:      #2c6cb3;
+  --poke-red:       #cc0000;
+  --poke-terminal:  #1a2a6c;
+  --poke-font:      'Press Start 2P', 'Courier New', monospace;
+  --poke-body:      'Lato', sans-serif;
+  --pixel-border:   3px solid #1a1a2e;
+  --pixel-shadow:   4px 4px 0 #1a1a2e;
 }
 
-a {
-  text-decoration: none !important;
+html, body {
+  background-color: var(--poke-bg);
+  color: var(--poke-dark);
 }
+
+h1, h2, h3 {
+  font-family: var(--poke-font);
+  font-weight: normal;
+  line-height: 1.6;
+}
+h1 { font-size: 1.3rem; letter-spacing: 2px; }
+h2 { font-size: 1rem;   letter-spacing: 1px; }
+h3 { font-size: 0.85rem; }
+
+a { text-decoration: none !important; }
 
 blockquote {
-  border-left: 4px solid $secondary;
+  border-left: 4px solid var(--poke-yellow);
   padding-left: 15px;
 }
 
-input,
-select {
+input, select {
   padding: 0.6rem !important;
   height: auto !important;
 }
@@ -50,6 +85,44 @@ select {
 }
 
 .form-select {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3e%3cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e");
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3e%3cpath fill='%231a1a2e' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e");
   background-size: 8px 10px;
+}
+
+/* Pixel utility */
+.pixel-box {
+  border: var(--pixel-border);
+  background: var(--poke-panel);
+  box-shadow: var(--pixel-shadow);
+  border-radius: 0;
+}
+
+.pixel-box-label {
+  font-family: var(--poke-font);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  color: var(--poke-dark);
+  padding: 3px 10px;
+  background: var(--poke-bg);
+  border: 2px solid var(--poke-dark);
+  display: inline-block;
+  margin-bottom: 6px;
+  letter-spacing: 1px;
+}
+
+.hp-bar {
+  height: 12px;
+  background: #a09070;
+  border: 2px solid var(--poke-dark);
+  overflow: hidden;
+  margin: 3px 0;
+}
+
+.hp-bar-fill {
+  height: 100%;
+  background: #40c840;
+  transition: width 0.8s ease;
+
+  &.medium { background: #c8c840; }
+  &.low    { background: #c84040; }
 }

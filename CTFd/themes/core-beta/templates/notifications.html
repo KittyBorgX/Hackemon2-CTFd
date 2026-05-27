@@ -3,113 +3,105 @@
 {% block stylesheets %}
 {{ super() }}
 <style>
-    :root {
-        --pokemon-yellow: #ffcc00;
-        --pokemon-blue: #3B4CCA;
-        --card-bg: rgba(30, 30, 35, 0.95);
-        --card-border: #3B4CCA;
-        --card-shadow: rgba(0, 0, 0, 0.3);
-        --text-primary: #e6e6e6;
-        --text-secondary: #a0a0a0;
-    }
+    body { background-color: var(--poke-bg) !important; }
 
     .jumbotron {
-        background: linear-gradient(135deg, #1a2a6c 0%, #3B4CCA 100%);
-        color: var(--pokemon-yellow);
-        padding: 2rem 1rem;
-        border-bottom: 5px solid var(--pokemon-yellow);
-        margin-bottom: 2rem;
-        border-radius: 0;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        background: var(--poke-dark) !important;
+        border-bottom: 4px solid var(--poke-yellow);
+        padding: 2.5rem 1rem;
     }
-
-    .jumbotron h1,
-    .jumbotron .h1 {
-        font-family: 'Pokemon Solid', sans-serif;
-        font-weight: bold;
-        text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2);
+    .jumbotron h1 {
+        color: var(--poke-yellow) !important;
+        text-shadow: 3px 3px 0 var(--poke-blue) !important;
     }
-
-    .pokemon-font {
-        font-family: 'Pokemon Solid', sans-serif;
-    }
+    .jumbotron p { color: rgba(255,255,255,0.9) !important; }
 
     .oak-message-card {
-        background: var(--card-bg);
-        border: 2px solid var(--card-border);
-        border-radius: 15px;
+        background: var(--poke-panel);
+        border: var(--pixel-border);
+        border-radius: 0 !important;
         margin-bottom: 2rem;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-        padding: 1.5rem;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        box-shadow: var(--pixel-shadow);
+        padding: 0;
+        position: relative;
     }
-    
-    .oak-message-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+    .oak-message-card::before {
+        content: '▶ PROFESSOR OAK';
+        font-family: var(--poke-font);
+        font-size: 0.5rem;
+        letter-spacing: 1.5px;
+        color: var(--poke-yellow);
+        background: var(--poke-dark);
+        padding: 4px 10px;
+        border-right: 3px solid var(--poke-yellow);
+        border-bottom: 3px solid var(--poke-yellow);
+        position: absolute;
+        top: -1px;
+        left: -1px;
     }
-
-    .oak-message-card .card-title {
-        font-family: 'Pokemon Solid', sans-serif;
-        color: var(--pokemon-yellow);
-        font-size: 1.8rem;
-        border-bottom: 2px solid var(--pokemon-blue);
+    .oak-card-body {
+        padding: 3rem 2rem 1.5rem;
+    }
+    .card-title {
+        font-family: var(--poke-font) !important;
+        color: var(--poke-dark) !important;
+        font-size: 0.85rem !important;
+        border-bottom: 3px solid var(--poke-yellow);
         padding-bottom: 0.5rem;
         margin-bottom: 1rem;
-        text-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
     }
-
-    .oak-message-card .card-body p {
-        font-size: 1.1rem;
-        line-height: 1.6;
-        color: var(--text-primary);
-    }
-    
-    .oak-message-card .card-body a {
-        color: var(--pokemon-yellow);
-        text-decoration: none;
-        font-weight: 500;
-    }
-    
-    .oak-message-card .card-body a:hover {
-        text-decoration: underline;
-    }
-
-    .oak-message-card .card-footer {
-        background: transparent;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        padding-top: 1rem;
-        margin-top: 1rem;
-        text-align: right;
+    .message-content { font-size: 1rem; line-height: 1.7; color: var(--poke-dark); }
+    .message-content a { color: var(--poke-blue) !important; font-weight: bold; }
+    .message-content a:hover { color: var(--poke-red) !important; }
+    .card-footer-inner {
+        background: var(--poke-bg);
+        border-top: 2px solid rgba(26,26,46,0.2);
+        padding: 0.8rem 2rem;
         font-style: italic;
-        color: var(--text-secondary);
+        color: rgba(26,26,46,0.5);
+        font-size: 0.8rem;
+        font-family: var(--poke-font);
+        font-size: 0.45rem;
     }
+    .empty-message {
+        text-align: center;
+        padding: 4rem 1rem;
+    }
+    .empty-message h2 {
+        color: var(--poke-dark) !important;
+        font-size: 0.9rem !important;
+        margin-bottom: 1rem;
+    }
+    .empty-message p { color: var(--poke-blue) !important; }
 </style>
 {% endblock %}
 
 {% block content %}
 <div class="jumbotron">
     <div class="container">
-        <h1 class="pokemon-font">Professor Oak's Messages</h1>
+        <h1>Professor Oak's Messages</h1>
         <p class="lead">Important updates from the lab!</p>
     </div>
 </div>
 <div class="container">
     {% if not notifications %}
-    <div class="text-center py-5">
-        <h2 class="pokemon-font" style="color: var(--pokemon-yellow);">No new messages!</h2>
-        <p class="lead" style="color: var(--text-secondary);">The Professor is busy with his research. Check back later!</p>
+    <div class="empty-message">
+        <div class="pixel-box d-inline-block p-4 mt-3">
+            <p class="pixel-box-label">STATUS</p>
+            <h2>No new messages!</h2>
+            <p>The Professor is busy with his research. Check back later!</p>
+        </div>
     </div>
     {% endif %}
     {% for notification in notifications %}
     <div class="oak-message-card">
-        <div class="card-body">
+        <div class="oak-card-body">
             <h3 class="card-title">{{ notification.title }}</h3>
             <div class="message-content">
                 {{ notification.html | safe }}
             </div>
         </div>
-        <div class="card-footer">
+        <div class="card-footer-inner">
             Sent: <span data-time="{{ notification.date | isoformat }}"></span>
         </div>
     </div>
@@ -120,4 +112,3 @@
 {% block scripts %}
   {{ Assets.js("assets/js/notifications.js") }}
 {% endblock %}
-

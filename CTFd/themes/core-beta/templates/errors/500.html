@@ -1,19 +1,25 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-<div class="container">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="pt-5 mt-5 text-center">
-				<h1>500</h1>
-				<hr class="w-50 m-auto">
-				<br/>
-				<h2>{{ error }}</h2>
-			</div>
-		</div>
-	</div>
+<div class="container" style="padding-top: 5rem; padding-bottom: 5rem;">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <div class="pixel-box p-4">
+                <p class="pixel-box-label">CRITICAL ERROR</p>
+                <h1 style="color: var(--poke-red); font-size: 3rem !important; text-shadow: 4px 4px 0 var(--poke-dark); margin-bottom: 1rem;">500</h1>
+                <h2 style="color: var(--poke-dark); margin-bottom: 1rem;">The server fainted!</h2>
+                <p style="font-family: 'Courier New', monospace; font-size: 1rem; color: var(--poke-dark); line-height: 1.7; margin-bottom: 0.5rem;">
+                    {{ error }}
+                </p>
+                <p style="font-family: 'Courier New', monospace; font-size: 0.9rem; color: rgba(26,26,46,0.6); margin-bottom: 2rem;">
+                    Professor Oak is on it. Please try again shortly.
+                </p>
+                <div class="hp-bar" style="max-width: 200px; margin: 0 auto 1.5rem;">
+                    <div class="hp-bar-fill low" style="width: 5%;"></div>
+                </div>
+                <a href="/" class="btn btn-pokemon-yellow">▶ Return to Base</a>
+            </div>
+        </div>
+    </div>
 </div>
-
-
 {% endblock %}

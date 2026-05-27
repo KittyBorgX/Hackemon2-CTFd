@@ -1,168 +1,170 @@
 <style>
-    :root {
-        --surface-dark: #161b22;
-        --surface-elevated: #21262d;
-        --text-primary: #e6edf3;
-        --text-secondary: #8b949e;
-        --accent-yellow: #ffd733;
-        --accent-blue: #3B4CCA;
-        --accent-red: #E3350D;
-        --border-color: #30363d;
-        --success-glow: rgba(31, 136, 61, 0.6);
-        --danger-glow: rgba(248, 81, 73, 0.6);
-    }
-
     .modal-content {
-        background: var(--surface-dark);
-        color: var(--text-primary);
-        border: 2px solid var(--border-color);
-        border-radius: 16px;
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+        background: var(--poke-dark) !important;
+        border: 3px solid var(--poke-yellow) !important;
+        box-shadow: 8px 8px 0 rgba(0,0,0,0.6) !important;
+        border-radius: 0 !important;
     }
-
-    .btn-close {
-        filter: invert(1) grayscale(100%) brightness(200%);
-    }
-
-    .nav-tabs {
-        border-bottom: 2px solid var(--border-color);
-        padding: 0 0.5rem;
-    }
-    .nav-tabs .nav-link {
-        color: var(--text-secondary);
-        background: transparent;
-        border: none;
-        padding: 0.75rem 1rem;
-        font-weight: 600;
-        transition: color 0.2s ease;
-    }
-    .nav-tabs .nav-link.active {
-        color: var(--accent-yellow);
-        background: transparent;
-        border-bottom: 3px solid var(--accent-yellow);
-    }
-    .nav-tabs .nav-link:hover {
-        color: var(--text-primary);
-    }
-
     .challenge-name {
-        font-family: 'Pokemon Solid', sans-serif;
-        color: var(--accent-yellow);
-        font-size: 2.2rem;
-        text-shadow: 0 0 8px rgba(0,0,0,0.7);
+        font-family: var(--poke-font) !important;
+        color: var(--poke-yellow) !important;
+        font-size: 1.1rem !important;
+        text-shadow: 2px 2px 0 var(--poke-blue);
+        line-height: 1.6;
     }
     .challenge-value {
-        font-family: 'Pokemon Solid', sans-serif;
-        color: var(--accent-red);
-        font-size: 1.5rem;
-        margin-top: -0.5rem;
+        font-family: var(--poke-font) !important;
+        color: var(--poke-red) !important;
+        font-size: 0.8rem !important;
+        margin-top: -0.3rem;
     }
     .challenge-tag {
-        background-color: var(--accent-blue);
-        color: var(--text-primary);
-        border-radius: 15px;
-        padding: 0.3rem 0.8rem;
-        font-size: 0.8rem;
-        font-weight: 600;
+        background-color: var(--poke-blue) !important;
+        color: #fff !important;
+        border-radius: 0 !important;
+        padding: 0.2rem 0.6rem;
+        font-family: var(--poke-font) !important;
+        font-size: 0.45rem !important;
+        border: 2px solid rgba(255,255,255,0.3) !important;
     }
-
     .challenge-desc {
-        font-size: 1.1rem;
+        font-size: 1rem;
         line-height: 1.7;
-        margin: 1.5rem 0;
+        margin: 1rem 0;
+        color: rgba(255,255,255,0.9) !important;
     }
+    .challenge-desc * { color: rgba(255,255,255,0.85) !important; }
+    .challenge-desc a { color: var(--poke-yellow) !important; }
+    .challenge-desc code {
+        background: rgba(255,255,255,0.15) !important;
+        color: #88ff88 !important;
+        padding: 1px 4px;
+        border-radius: 0 !important;
+        border: 1px solid rgba(255,255,255,0.2) !important;
+    }
+    .challenge-desc pre {
+        background: rgba(0,0,0,0.4) !important;
+        border: 2px solid var(--poke-yellow) !important;
+        padding: 12px;
+        color: #88ff88 !important;
+        border-radius: 0 !important;
+    }
+    .challenge-connection-info code {
+        background: rgba(0,0,0,0.5) !important;
+        color: #88ff88 !important;
+        font-family: 'Courier New', monospace !important;
+        border: 2px solid #88ff88 !important;
+        padding: 4px 8px;
+        display: inline-block;
+    }
+    .challenge-attribution { color: rgba(255,255,255,0.5) !important; font-size: 0.75rem; }
 
     .challenge-input {
-        background: var(--surface-elevated);
-        border: 2px solid var(--border-color);
-        color: var(--text-primary);
-        border-radius: 8px;
-        padding: 0.75rem 1rem;
-        font-size: 1.1rem;
-        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        background: var(--poke-panel) !important;
+        border: 2px solid var(--poke-yellow) !important;
+        color: var(--poke-dark) !important;
+        border-radius: 0 !important;
+        padding: 0.65rem 1rem;
+        font-family: 'Courier New', monospace !important;
+        font-size: 1rem;
+        box-shadow: 3px 3px 0 rgba(0,0,0,0.5) !important;
     }
     .challenge-input:focus {
-        border-color: var(--accent-blue);
-        box-shadow: 0 0 10px rgba(59, 76, 202, 0.5);
-        outline: none;
+        border-color: var(--poke-yellow) !important;
+        outline: none !important;
+        box-shadow: 3px 3px 0 rgba(255,204,0,0.5) !important;
     }
+    .challenge-input::placeholder { color: rgba(26,26,46,0.5) !important; }
 
-    .btn-pokemon-yellow {
-        background-color: #ffcc00;
-        color: #2c6cb3;
-        border: 3px solid #2c6cb3;
-        padding: 0.5rem 1.5rem;
-        font-size: 1.2rem;
-        border-radius: 30px;
-        font-weight: bold;
-        text-transform: uppercase;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 0 #d4a900;
-        font-family: 'Press Start 2P', cursive;
-        text-decoration: none;
-        cursor: pointer;
+    .nav-tabs { border-bottom: 3px solid var(--poke-yellow) !important; }
+    .nav-tabs .nav-link {
+        color: rgba(255,204,0,0.55) !important;
+        border: 2px solid transparent !important;
+        font-size: 0.55rem !important;
+        font-family: var(--poke-font) !important;
     }
-    
-    .btn-pokemon-yellow:hover {
-        background-color: #ffd633;
-        color: var(--accent-red) !important;
-        border-color: var(--accent-red);
-        transform: translateY(-2px);
-        box-shadow: 0 6px 0 #d4a900;
+    .nav-tabs .nav-link.active {
+        background: var(--poke-yellow) !important;
+        color: var(--poke-dark) !important;
+        border-color: var(--poke-yellow) !important;
     }
-    
-    .btn-pokemon-yellow:active {
-        transform: translateY(2px);
-        box-shadow: 0 2px 0 #d4a900;
-    }
+    .nav-tabs .nav-link:hover { color: var(--poke-yellow) !important; }
 
-    /* Hints */
+    .btn-close { filter: invert(1) brightness(2) !important; }
+
     details {
-        background: var(--surface-elevated);
-        border: 1px solid var(--border-color);
-        border-radius: 8px;
+        background: rgba(255,255,255,0.07);
+        border: 2px solid var(--poke-yellow);
+        border-radius: 0 !important;
         margin-bottom: 0.5rem;
     }
     summary {
-        padding: 0.75rem 1.25rem;
-        font-weight: 600;
+        padding: 0.65rem 1rem;
+        font-family: var(--poke-font) !important;
+        font-size: 0.55rem !important;
         cursor: pointer;
+        color: var(--poke-yellow) !important;
         list-style: none;
         display: flex;
         justify-content: space-between;
         align-items: center;
     }
     summary::-webkit-details-marker { display: none; }
-    summary:after {
-        content: '\25B6'; /* Play icon */
-        font-size: 0.8rem;
-        transition: transform 0.2s ease;
-    }
-    details[open] summary:after {
-        transform: rotate(90deg);
-    }
+    summary::after { content: '▶'; font-size: 0.6rem; transition: transform 0.2s; }
+    details[open] summary::after { transform: rotate(90deg); }
     details > div {
-        padding: 0 1.25rem 1rem 1.25rem;
-        border-top: 1px solid var(--border-color);
-        margin-top: 0.5rem;
+        padding: 0.75rem 1rem 1rem;
+        border-top: 2px solid var(--poke-yellow);
+        color: rgba(255,255,255,0.85) !important;
     }
 
+    .table-striped { border-color: var(--poke-yellow) !important; }
+    .table-striped thead th {
+        color: var(--poke-yellow) !important;
+        border-color: var(--poke-yellow) !important;
+        background: rgba(255,255,255,0.08) !important;
+    }
+    .table-striped tbody tr {
+        color: rgba(255,255,255,0.85) !important;
+        background: transparent !important;
+    }
+    .table-striped tbody tr:nth-child(even) {
+        background: rgba(255,255,255,0.05) !important;
+    }
+    .table-striped a { color: var(--poke-yellow) !important; }
 
+    .alert-success {
+        background: #1a4a2a !important;
+        border-color: #40c840 !important;
+        color: #88ff88 !important;
+    }
+    .alert-danger {
+        background: #4a1a1a !important;
+        border-color: var(--poke-red) !important;
+        color: #ff9090 !important;
+    }
+    .alert-info {
+        background: #1a2a4a !important;
+        border-color: var(--poke-blue) !important;
+        color: #88aaff !important;
+    }
+    .alert-warning {
+        background: #3a2a00 !important;
+        border-color: var(--poke-yellow) !important;
+        color: var(--poke-yellow) !important;
+    }
 </style>
 <div :class="getStyles()" role="document" x-data="Challenge" x-init="id = {{ challenge.id }}; max_attempts = {{ max_attempts }}; attempts = {{ attempts }}">
   <div class="modal-content">
     <div class="modal-body py-4 px-4 px-sm-5">
-
       <div>
         <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
-
         <ul class="nav nav-tabs">
           <li class="nav-item">
             <button class="nav-link active" data-bs-target="#challenge" @click="showChallenge()">
               {% trans %}Challenge{% endtrans %}
             </button>
           </li>
-
           {% block solves %}
             <li class="nav-item">
               <button class="nav-link challenge-solves" data-bs-target="#solves" @click="showSolves()">
@@ -178,13 +180,8 @@
       <div>
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane fade show active" id="challenge">
-            <h2 class="challenge-name text-center pt-3">
-              {{ challenge.name }}
-            </h2>
-            <h3 class="challenge-value text-center">
-              {{ challenge.value }}
-            </h3>
-
+            <h2 class="challenge-name text-center pt-3">{{ challenge.name }}</h2>
+            <h3 class="challenge-value text-center">CP: {{ challenge.value }}</h3>
 
             {% if tags %}
               <div class="challenge-tags text-center pt-2 pb-3">
@@ -196,7 +193,7 @@
               </div>
             {% endif %}
 
-            <small class="challenge-attribution text-center text-muted">
+            <small class="challenge-attribution text-center d-block">
               {% block attribution %}{{ challenge.byline }}{% endblock %}
             </small>
 
@@ -231,9 +228,9 @@
                     {% else %}
                     <details @toggle="showHint(event)">
                       {% if hint.title %}
-                      <summary>{{ hint.title }} (Cost: {{ hint.cost }} point{{ hint.cost|pluralize }})</summary>
+                      <summary>{{ hint.title }} (Cost: {{ hint.cost }} pt{{ hint.cost|pluralize }})</summary>
                       {% else %}
-                      <summary>Unlock Hint for {{ hint.cost }} point{{ hint.cost|pluralize }}</summary>
+                      <summary>Unlock Hint — {{ hint.cost }} pt{{ hint.cost|pluralize }}</summary>
                       {% endif %}
                       <div x-html="html"></div>
                     </details>
@@ -255,15 +252,10 @@
                     {% else %}
                       {% set filename = segments | last %}
                     {% endif %}
-                    <a
-                        class="btn btn-pokemon-yellow mb-1 d-inline-block px-2 w-100 text-truncate"
-                        href="{{ file }}"
-                        title="{{ filename }}"
-                    >
+                    <a class="btn btn-pokemon-yellow mb-1 d-inline-block px-2 w-100 text-truncate"
+                        href="{{ file }}" title="{{ filename }}">
                       <i class="fas fa-download"></i>
-                      <small>
-                        {{ filename }}
-                      </small>
+                      <small>{{ filename }}</small>
                     </a>
                   </div>
                 {% endfor %}
@@ -271,7 +263,7 @@
             {% endif %}
 
             <template x-if="max_attempts > 0">
-              <p class="text-center">
+              <p class="text-center" style="color: rgba(255,255,255,0.8); font-size: 0.75rem; font-family: var(--poke-font);">
                 <span x-text="attempts"></span>/<span x-text="max_attempts"></span> {% trans c=max_attempts %}attempt{% pluralize %}attempts{% endtrans %}
               </p>
             </template>
@@ -279,25 +271,18 @@
             <div class="row submit-row">
               <div class="col-12 col-sm-8">
                 {% block input %}
-                  <input
-                      id="challenge-id" class="challenge-id" type="hidden"
-                      value="{{ challenge.id }}"
-                  >
-                  <input
-                      id="challenge-input" class="challenge-input form-control"
+                  <input id="challenge-id" class="challenge-id" type="hidden" value="{{ challenge.id }}">
+                  <input id="challenge-input" class="challenge-input form-control"
                       type="text" name="submission"
                       @keyup.enter="submitChallenge()"
-                      placeholder="{% trans %}Flag{% endtrans %}" x-model="submission"
-                  >
+                      placeholder="{% trans %}Flag{% endtrans %}" x-model="submission">
                 {% endblock %}
               </div>
-
               <div class="col-12 col-sm-4 mt-3 mt-sm-0 key-submit">
                 {% block submit %}
-                  <button
-                      id="challenge-submit" class="challenge-submit btn btn-pokemon-yellow w-100 h-100" type="submit"
-                      @click.debounce.500ms="submitChallenge()"
-                  >
+                  <button id="challenge-submit"
+                      class="challenge-submit btn btn-pokemon-yellow w-100 h-100" type="submit"
+                      @click.debounce.500ms="submitChallenge()">
                     {% trans %}Submit{% endtrans %}
                   </button>
                 {% endblock %}
@@ -307,15 +292,13 @@
             <div class="row notification-row">
               <div class="col-12">
                 <template x-if="response">
-                  {# This alert is re-used for all alerts, so it's important not to make it dismissible #}
                   <div class="alert text-center w-100 mt-3"
                       :class="{
                         'alert-success': response.data.status == 'correct',
                         'alert-info': response.data.status == 'already_solved',
                         'alert-danger': response.data.status == 'incorrect',
                         'alert-warning': response.data.status == 'paused',
-                      }" role="alert"
-                  >
+                      }" role="alert">
                     <strong x-text="response.data.message"></strong>
                     <div x-show="(response.data.status == 'correct' || response.data.status == 'already_solved')">
                       <div x-show="getNextId()">
@@ -337,9 +320,6 @@
                           </a>
                           <a :href="'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(share_url)" role="button" class="btn btn-sm btn-outline-secondary" target="_blank">
                             <i class="fa-brands fa-facebook-f"></i>
-                          </a>
-                          <a :href="'http://www.linkedin.com/shareArticle?url=' + encodeURIComponent(share_url)" role="button" class="btn btn-sm btn-outline-secondary" target="_blank">
-                            <i class="fa-brands fa-linkedin-in"></i>
                           </a>
                         </div>
                       </div>
@@ -364,9 +344,7 @@
                   <tbody id="challenge-solves-names">
                   <template x-for="solve in solves">
                     <tr>
-                      <td>
-                        <a :href="solve.account_url" x-text="solve.name"></a>
-                      </td>
+                      <td><a :href="solve.account_url" x-text="solve.name"></a></td>
                       <td x-text="solve.date"></td>
                     </tr>
                   </template>

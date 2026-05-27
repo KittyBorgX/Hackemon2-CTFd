@@ -1,19 +1,25 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-<div class="container">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="pt-5 mt-5 text-center">
-				<h1>502</h1>
-				<hr class="w-50 m-auto">
-				<br/>
-				<h2>{% trans %}502 Bad Gateway{% endtrans %}</h2>
-			</div>
-		</div>
-	</div>
+<div class="container" style="padding-top: 5rem; padding-bottom: 5rem;">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <div class="pixel-box p-4">
+                <p class="pixel-box-label">LINK BROKEN</p>
+                <h1 style="color: var(--poke-red); font-size: 3rem !important; text-shadow: 4px 4px 0 var(--poke-dark); margin-bottom: 1rem;">502</h1>
+                <h2 style="color: var(--poke-dark); margin-bottom: 1rem;">Bad Gateway!</h2>
+                <p style="font-family: 'Courier New', monospace; font-size: 1rem; color: var(--poke-dark); line-height: 1.7; margin-bottom: 0.5rem;">
+                    {% trans %}502 Bad Gateway{% endtrans %} — the Pokémon Center is offline.
+                </p>
+                <p style="font-family: 'Courier New', monospace; font-size: 0.9rem; color: rgba(26,26,46,0.6); margin-bottom: 2rem;">
+                    Nurse Joy is working on it. Please try again shortly.
+                </p>
+                <div class="hp-bar" style="max-width: 200px; margin: 0 auto 1.5rem;">
+                    <div class="hp-bar-fill low" style="width: 2%;"></div>
+                </div>
+                <a href="/" class="btn btn-pokemon-yellow">▶ Return to Base</a>
+            </div>
+        </div>
+    </div>
 </div>
-
-
 {% endblock %}

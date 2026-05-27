@@ -3,82 +3,94 @@
 {% block stylesheets %}
 {{ super() }}
 <style>
-    :root {
-        --pokemon-yellow: #ffcc00;
-        --pokemon-blue: #2c6cb3;
-        --table-bg: rgba(255, 255, 255, 0.9);
-        --table-border: #ffcc00;
-        --table-shadow: rgba(0, 0, 0, 0.2);
-        --gold-medal: #ffd700;
-        --silver-medal: #c0c0c0;
-        --bronze-medal: #cd7f32;
-    }
+    body { background-color: var(--poke-bg) !important; }
 
     .jumbotron {
-        background-color: var(--pokemon-blue);
-        color: var(--pokemon-yellow);
-        padding: 2rem 1rem;
-        border-bottom: 5px solid var(--pokemon-yellow);
-        margin-bottom: 2rem;
-        border-radius: 0;
+        background: var(--poke-dark) !important;
+        border-bottom: 4px solid var(--poke-yellow);
+        padding: 2.5rem 1rem;
     }
-
-    .jumbotron h1,
-    .jumbotron .h1 {
-        font-family: 'Pokemon Solid', sans-serif;
-        font-weight: bold;
-        text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2);
+    .jumbotron h1 {
+        color: var(--poke-yellow) !important;
+        text-shadow: 3px 3px 0 var(--poke-blue) !important;
     }
-
-    .pokemon-font {
-        font-family: 'Pokemon Solid', sans-serif;
-    }
+    .jumbotron p { color: rgba(255,255,255,0.9) !important; }
 
     .hall-of-fame-table {
-        background: var(--table-bg);
-        border-radius: 15px;
+        background: var(--poke-panel);
+        border: var(--pixel-border);
+        border-radius: 0 !important;
         overflow: hidden;
-        box-shadow: 0 4px 8px var(--table-shadow);
-        border: 4px solid var(--table-border);
+        box-shadow: var(--pixel-shadow);
     }
-
     .hall-of-fame-table thead th {
-        background-color: var(--pokemon-blue);
-        color: var(--pokemon-yellow);
-        font-family: 'Pokemon Solid', sans-serif;
-        font-size: 1.2rem;
-        border-bottom: 4px solid var(--table-border);
+        background: var(--poke-dark) !important;
+        color: var(--poke-yellow) !important;
+        font-family: var(--poke-font) !important;
+        font-size: 0.65rem !important;
+        border-color: var(--poke-yellow) !important;
         text-align: center;
+        padding: 12px !important;
     }
-
     .hall-of-fame-table tbody tr {
-        border-bottom: 1px solid #dee2e6;
+        background: var(--poke-panel) !important;
+        border-bottom: 2px solid rgba(26,26,46,0.15);
     }
-
-    .hall-of-fame-table tbody tr:last-child {
-        border-bottom: none;
+    .hall-of-fame-table tbody tr:nth-child(even) {
+        background: var(--poke-bg) !important;
     }
-
-    .hall-of-fame-table tbody tr:hover {
-        background-color: rgba(255, 204, 0, 0.2);
-    }
+    .hall-of-fame-table tbody tr:last-child { border-bottom: none; }
+    .hall-of-fame-table tbody tr:hover { background: rgba(255,204,0,0.25) !important; }
 
     .hall-of-fame-table .rank-col { width: 10%; }
-    .hall-of-fame-table .team-col { width: 70%; }
-    .hall-of-fame-table .score-col { width: 20%; }
+    .hall-of-fame-table .team-col { width: 60%; }
+    .hall-of-fame-table .score-col { width: 30%; }
 
-    .rank-medal {
-        font-size: 1.5rem;
-        margin-left: 10px;
+    .rank-medal { font-size: 1.4rem; margin-left: 8px; }
+    .rank-1 { color: #ffd700; }
+    .rank-2 { color: #c0c0c0; }
+    .rank-3 { color: #cd7f32; }
+
+    .current-user { background-color: rgba(44,108,179,0.2) !important; font-weight: bold; }
+
+    .score-bar-cell { padding: 8px 12px !important; }
+    .score-bar-wrap { display: flex; align-items: center; gap: 8px; }
+    .score-bar-inner {
+        flex: 1;
+        height: 10px;
+        background: rgba(26,26,46,0.15);
+        border: 2px solid var(--poke-dark);
+        border-radius: 0;
+        overflow: hidden;
+    }
+    .score-bar-fill {
+        height: 100%;
+        background: var(--poke-blue);
+        transition: width 1s ease;
+    }
+    .rank-1-row .score-bar-fill { background: #ffd700; }
+    .rank-2-row .score-bar-fill { background: #c0c0c0; }
+    .rank-3-row .score-bar-fill { background: #cd7f32; }
+    .score-value {
+        font-family: var(--poke-font);
+        font-size: 0.6rem;
+        color: var(--poke-dark);
+        min-width: 50px;
+        text-align: right;
     }
 
-    .rank-1 { color: var(--gold-medal); }
-    .rank-2 { color: var(--silver-medal); }
-    .rank-3 { color: var(--bronze-medal); }
-
-    .current-user {
-        background-color: rgba(44, 108, 179, 0.3) !important;
-        font-weight: bold;
+    .nav-pills .nav-link {
+        font-family: var(--poke-font) !important;
+        font-size: 0.55rem !important;
+        border-radius: 0 !important;
+        border: 2px solid var(--poke-dark) !important;
+        color: var(--poke-dark) !important;
+        margin: 2px;
+        padding: 6px 12px !important;
+    }
+    .nav-pills .nav-link.active {
+        background: var(--poke-dark) !important;
+        color: var(--poke-yellow) !important;
     }
 </style>
 {% endblock %}
@@ -86,7 +98,7 @@
 {% block content %}
 <div class="jumbotron">
     <div class="container">
-        <h1 class="pokemon-font">Hall of Fame</h1>
+        <h1>Hall of Fame</h1>
         <p class="lead">See which trainers are leading the pack!</p>
     </div>
 </div>
@@ -116,25 +128,37 @@
             <table class="table align-middle hall-of-fame-table">
                 <thead>
                     <tr>
-                        <th class="rank-col">{% trans %}Rank{% endtrans %}</th>
+                        <th class="rank-col text-center">{% trans %}Rank{% endtrans %}</th>
                         <th class="team-col text-start ps-3">{{ get_mode_as_word(capitalize=True) }}</th>
-                        <th class="score-col">{% trans %}Score{% endtrans %}</th>
+                        <th class="score-col text-center">{% trans %}Score{% endtrans %}</th>
                     </tr>
                 </thead>
                 <tbody>
                     <template x-for="(standing, index) in standings.filter(i => activeBracket ? i.bracket_id==activeBracket : true)">
-                        <tr :class="{'current-user': standing.account_id == {{ session.get('id') | tojson }} }">
+                        <tr :class="{
+                            'current-user': standing.account_id == {{ session.get('id') | tojson }},
+                            'rank-1-row': index === 0,
+                            'rank-2-row': index === 1,
+                            'rank-3-row': index === 2
+                        }">
                             <td class="rank-col text-center">
-                                <strong x-text="index + 1"></strong>
+                                <strong x-text="index + 1" style="font-family: var(--poke-font); font-size: 0.7rem;"></strong>
                                 <i class="fas fa-medal rank-medal" :class="{'rank-1': index === 0, 'rank-2': index === 1, 'rank-3': index === 2}" x-show="index < 3"></i>
                             </td>
                             <td class="team-col text-start">
-                                <a :href="standing.account_url" x-text="standing.name"></a>
+                                <a :href="standing.account_url" x-text="standing.name" style="font-weight: bold;"></a>
                                 <template x-if="standing.bracket_name">
                                     <span class="badge bg-secondary ms-2" x-text="standing.bracket_name"></span>
                                 </template>
                             </td>
-                            <td class="score-col text-center" x-text="standing.score"></td>
+                            <td class="score-bar-cell score-col">
+                                <div class="score-bar-wrap" x-data="{ maxScore: standings[0]?.score || 1 }">
+                                    <div class="score-bar-inner">
+                                        <div class="score-bar-fill" :style="`width: ${Math.max(5, (standing.score / maxScore) * 100)}%`"></div>
+                                    </div>
+                                    <span class="score-value" x-text="standing.score"></span>
+                                </div>
+                            </td>
                         </tr>
                     </template>
                 </tbody>
@@ -142,7 +166,11 @@
         </div>
 
         <div class="col-md-12" x-show="!standings.length">
-            <h3 class="text-center text-muted pokemon-font">Scoreboard is empty</h3>
+            <div class="pixel-box text-center p-4 mt-4">
+                <p class="pixel-box-label">STATUS</p>
+                <p style="font-family: var(--poke-font); font-size: 0.7rem; color: var(--poke-dark);">Scoreboard is empty</p>
+                <p style="color: var(--poke-blue);">No trainers have submitted yet!</p>
+            </div>
         </div>
     </div>
 </div>

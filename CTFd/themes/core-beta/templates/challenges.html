@@ -66,10 +66,34 @@
         border-color: var(--poke-red);
     }
     .challenge-card.challenge-solved {
-        border-color: var(--poke-green);
+        border-color: #3a7a3a;
         box-shadow: 3px 3px 0 rgba(30,22,8,0.3);
+        opacity: 0.75;
     }
-    .challenge-card.challenge-solved::before { background: var(--poke-green); }
+    .challenge-card.challenge-solved::before { background: #3a7a3a; }
+
+    /* Difficulty border + top stripe */
+    .diff-border-easy { border-color: #3a7a3a !important; }
+    .diff-border-easy::before { background: #3a7a3a; }
+    .diff-border-med { border-color: #b06000 !important; }
+    .diff-border-med::before { background: #b06000; }
+    .diff-border-hard { border-color: var(--poke-red) !important; }
+    .diff-border-hard::before { background: var(--poke-red); }
+
+    /* Difficulty badge */
+    .diff-badge {
+        font-family: var(--poke-font);
+        font-size: 0.52rem;
+        padding: 3px 8px;
+        border: 2px solid;
+        display: inline-block;
+        margin-top: 0.5rem;
+        line-height: 1.8;
+        letter-spacing: 1px;
+    }
+    .diff-easy { color: #3a7a3a; border-color: #3a7a3a; background: rgba(58,122,58,0.1); }
+    .diff-med  { color: #b06000; border-color: #b06000; background: rgba(176,96,0,0.1); }
+    .diff-hard { color: var(--poke-red); border-color: var(--poke-red); background: rgba(176,40,40,0.08); }
 
     .challenge-inner { padding: 1.2rem; }
 
@@ -86,15 +110,6 @@
         color: var(--poke-red);
         margin-bottom: 0.3rem;
         line-height: 1.8;
-    }
-
-    .pokemon-sprite-container { margin-top: 0.5rem; }
-    .pokemon-sprite {
-        width: 64px;
-        height: 64px;
-        object-fit: contain;
-        image-rendering: pixelated;
-        image-rendering: crisp-edges;
     }
 
     .solved-overlay {
@@ -147,10 +162,7 @@
 {% block content %}
 <div class="jumbotron">
     <div class="container">
-        <div class="d-flex align-items-baseline gap-3 flex-wrap">
-            <span class="pixel-box-label" style="background: var(--poke-red); color: #fff; border-color: #fff;">▶ CHALLENGE ARENA</span>
-        </div>
-        <h1 class="mt-2">Challenge Arena</h1>
+        <h1>Challenge Arena</h1>
         <p class="lead">Prove your skills and become the HACKEMON Master!</p>
     </div>
 </div>
@@ -186,13 +198,20 @@
                         <template x-for="c in getChallenges(category)" :key="c.id">
                             <div class="col-sm-6 col-md-4 col-lg-3 my-3">
                                 <div class="challenge-card"
-                                    :class="{ 'challenge-solved': c.solved_by_me }"
+                                    :class="{
+                                        'challenge-solved': c.solved_by_me,
+                                        'diff-border-easy': !c.solved_by_me && c.value < 100,
+                                        'diff-border-med':  !c.solved_by_me && c.value >= 100 && c.value <= 200,
+                                        'diff-border-hard': !c.solved_by_me && c.value > 200
+                                    }"
                                     @click="loadChallenge(c.id)">
                                     <div class="challenge-inner">
                                         <h4 class="challenge-card-title" x-text="c.name"></h4>
                                         <p class="challenge-card-cp">CP <span x-text="c.value"></span></p>
-                                        <div x-data="{ pokemonId: Math.floor(Math.random() * 898) + 1 }" class="pokemon-sprite-container">
-                                            <img :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`" alt="Pokemon" class="pokemon-sprite">
+                                        <div class="mt-1">
+                                            <span class="diff-badge"
+                                                  :class="c.value < 100 ? 'diff-easy' : c.value <= 200 ? 'diff-med' : 'diff-hard'"
+                                                  x-text="c.value < 100 ? 'EASY' : c.value <= 200 ? 'MEDIUM' : 'HARD'"></span>
                                         </div>
                                     </div>
                                     <div x-show="c.solved_by_me" class="solved-overlay">

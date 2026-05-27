@@ -1,21 +1,16 @@
 <style>
-    .modal-content {
-        background: var(--poke-dark) !important;
-        border: 3px solid var(--poke-yellow) !important;
-        box-shadow: 8px 8px 0 rgba(0,0,0,0.6) !important;
-        border-radius: 0 !important;
-    }
+    /* Challenge modal — parchment background (base.html owns .modal-content bg) */
     .challenge-name {
         font-family: var(--poke-font) !important;
-        color: var(--poke-yellow) !important;
-        font-size: 1.1rem !important;
-        text-shadow: 2px 2px 0 var(--poke-blue);
+        color: var(--poke-dark) !important;
+        font-size: 1rem !important;
+        text-shadow: 1px 1px 0 var(--poke-yellow);
         line-height: 1.6;
     }
     .challenge-value {
         font-family: var(--poke-font) !important;
         color: var(--poke-red) !important;
-        font-size: 0.8rem !important;
+        font-size: 0.75rem !important;
         margin-top: -0.3rem;
     }
     .challenge-tag {
@@ -24,77 +19,63 @@
         border-radius: 0 !important;
         padding: 0.2rem 0.6rem;
         font-family: var(--poke-font) !important;
-        font-size: 0.45rem !important;
-        border: 2px solid rgba(255,255,255,0.3) !important;
+        font-size: 0.5rem !important;
     }
     .challenge-desc {
-        font-size: 1rem;
+        font-size: 0.95rem;
         line-height: 1.7;
         margin: 1rem 0;
-        color: rgba(255,255,255,0.9) !important;
+        color: var(--poke-dark) !important;
+        display: block;
     }
-    .challenge-desc * { color: rgba(255,255,255,0.85) !important; }
-    .challenge-desc a { color: var(--poke-yellow) !important; }
+    .challenge-desc * { color: var(--poke-dark) !important; }
+    .challenge-desc a { color: var(--poke-blue) !important; }
     .challenge-desc code {
-        background: rgba(255,255,255,0.15) !important;
-        color: #88ff88 !important;
-        padding: 1px 4px;
+        background: rgba(30,22,8,0.08) !important;
+        color: var(--poke-dark) !important;
+        padding: 1px 5px;
         border-radius: 0 !important;
-        border: 1px solid rgba(255,255,255,0.2) !important;
+        border: 1px solid rgba(30,22,8,0.25) !important;
+        font-family: 'Courier New', monospace;
     }
     .challenge-desc pre {
-        background: rgba(0,0,0,0.4) !important;
-        border: 2px solid var(--poke-yellow) !important;
+        background: var(--poke-bg) !important;
+        border: 2px solid var(--poke-dark) !important;
         padding: 12px;
-        color: #88ff88 !important;
+        color: var(--poke-dark) !important;
         border-radius: 0 !important;
     }
     .challenge-connection-info code {
-        background: rgba(0,0,0,0.5) !important;
-        color: #88ff88 !important;
+        background: var(--poke-bg) !important;
+        color: var(--poke-dark) !important;
         font-family: 'Courier New', monospace !important;
-        border: 2px solid #88ff88 !important;
+        border: 2px solid var(--poke-dark) !important;
         padding: 4px 8px;
         display: inline-block;
+        border-radius: 0;
     }
-    .challenge-attribution { color: rgba(255,255,255,0.5) !important; font-size: 0.75rem; }
+    .challenge-attribution { color: rgba(30,22,8,0.5) !important; font-size: 0.75rem; }
 
     .challenge-input {
-        background: var(--poke-panel) !important;
-        border: 2px solid var(--poke-yellow) !important;
+        background: var(--poke-bg) !important;
+        border: 2px solid var(--poke-dark) !important;
         color: var(--poke-dark) !important;
         border-radius: 0 !important;
         padding: 0.65rem 1rem;
         font-family: 'Courier New', monospace !important;
-        font-size: 1rem;
-        box-shadow: 3px 3px 0 rgba(0,0,0,0.5) !important;
+        font-size: 0.95rem;
+        box-shadow: 2px 2px 0 rgba(30,22,8,0.2) !important;
     }
     .challenge-input:focus {
-        border-color: var(--poke-yellow) !important;
+        border-color: var(--poke-blue) !important;
         outline: none !important;
-        box-shadow: 3px 3px 0 rgba(255,204,0,0.5) !important;
+        box-shadow: 2px 2px 0 var(--poke-blue) !important;
     }
-    .challenge-input::placeholder { color: rgba(30,22,8,0.5) !important; }
-
-    .nav-tabs { border-bottom: 3px solid var(--poke-yellow) !important; }
-    .nav-tabs .nav-link {
-        color: rgba(255,204,0,0.55) !important;
-        border: 2px solid transparent !important;
-        font-size: 0.55rem !important;
-        font-family: var(--poke-font) !important;
-    }
-    .nav-tabs .nav-link.active {
-        background: var(--poke-yellow) !important;
-        color: var(--poke-dark) !important;
-        border-color: var(--poke-yellow) !important;
-    }
-    .nav-tabs .nav-link:hover { color: var(--poke-yellow) !important; }
-
-    .btn-close { filter: invert(1) brightness(2) !important; }
+    .challenge-input::placeholder { color: rgba(30,22,8,0.45) !important; }
 
     details {
-        background: rgba(255,255,255,0.07);
-        border: 2px solid var(--poke-yellow);
+        background: var(--poke-bg);
+        border: 2px solid var(--poke-dark);
         border-radius: 0 !important;
         margin-bottom: 0.5rem;
     }
@@ -103,55 +84,51 @@
         font-family: var(--poke-font) !important;
         font-size: 0.55rem !important;
         cursor: pointer;
-        color: var(--poke-yellow) !important;
+        color: var(--poke-dark) !important;
         list-style: none;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        line-height: 1.8;
     }
     summary::-webkit-details-marker { display: none; }
     summary::after { content: '▶'; font-size: 0.6rem; transition: transform 0.2s; }
     details[open] summary::after { transform: rotate(90deg); }
     details > div {
         padding: 0.75rem 1rem 1rem;
-        border-top: 2px solid var(--poke-yellow);
-        color: rgba(255,255,255,0.85) !important;
+        border-top: 2px solid rgba(30,22,8,0.2);
+        color: var(--poke-dark) !important;
     }
 
-    .table-striped { border-color: var(--poke-yellow) !important; }
     .table-striped thead th {
+        background: var(--poke-dark) !important;
         color: var(--poke-yellow) !important;
-        border-color: var(--poke-yellow) !important;
-        background: rgba(255,255,255,0.08) !important;
+        border-color: var(--poke-dark) !important;
     }
-    .table-striped tbody tr {
-        color: rgba(255,255,255,0.85) !important;
-        background: transparent !important;
-    }
-    .table-striped tbody tr:nth-child(even) {
-        background: rgba(255,255,255,0.05) !important;
-    }
-    .table-striped a { color: var(--poke-yellow) !important; }
+    .table-striped tbody td { color: var(--poke-dark) !important; }
+    .table-striped tbody tr:nth-child(even) td { background: var(--poke-bg) !important; }
+    .table-striped a { color: var(--poke-dark) !important; font-weight: bold; }
+    .table-striped a:hover { color: var(--poke-red) !important; }
 
     .alert-success {
-        background: #1a4a2a !important;
-        border-color: #40c840 !important;
-        color: #88ff88 !important;
+        background: #e8f5e9 !important;
+        border-color: #4caf50 !important;
+        color: #2e7d32 !important;
     }
     .alert-danger {
-        background: #4a1a1a !important;
+        background: #ffebee !important;
         border-color: var(--poke-red) !important;
-        color: #ff9090 !important;
+        color: #b71c1c !important;
     }
     .alert-info {
-        background: #1a2a4a !important;
+        background: #e3f2fd !important;
         border-color: var(--poke-blue) !important;
-        color: #88aaff !important;
+        color: #1565c0 !important;
     }
     .alert-warning {
-        background: #3a2a00 !important;
-        border-color: var(--poke-yellow) !important;
-        color: var(--poke-yellow) !important;
+        background: #fff8e1 !important;
+        border-color: #e65100 !important;
+        color: #e65100 !important;
     }
 </style>
 <div :class="getStyles()" role="document" x-data="Challenge" x-init="id = {{ challenge.id }}; max_attempts = {{ max_attempts }}; attempts = {{ attempts }}">

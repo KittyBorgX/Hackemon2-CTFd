@@ -3,30 +3,40 @@
 {% block stylesheets %}
 {{ super() }}
 <style>
-    body { background: var(--poke-bg) !important; }
+    body {
+        background: var(--poke-bg) !important;
+    }
 
     .jumbotron {
         background: var(--poke-dark) !important;
         border-bottom: 4px solid var(--poke-yellow);
         padding: 2.5rem 1rem;
     }
+
     .jumbotron h1 {
         color: var(--poke-yellow) !important;
         text-shadow: 3px 3px 0 var(--poke-blue) !important;
         font-size: 1.5rem !important;
     }
-    .jumbotron p { color: rgba(255,255,255,0.9) !important; }
 
-    .category-header { margin-bottom: 1.2rem; }
+    .jumbotron p {
+        color: rgba(255, 255, 255, 0.9) !important;
+    }
+
+    .category-header {
+        margin-bottom: 1.2rem;
+    }
+
     .category-label-box {
         display: inline-flex;
         align-items: center;
         gap: 8px;
         background: var(--poke-dark);
         border: 2px solid var(--poke-dark);
-        box-shadow: 3px 3px 0 rgba(30,22,8,0.3);
+        box-shadow: 3px 3px 0 rgba(30, 22, 8, 0.3);
         padding: 5px 16px;
     }
+
     .category-label-box h3 {
         font-family: var(--poke-font) !important;
         color: var(--poke-yellow) !important;
@@ -38,7 +48,11 @@
         border-bottom: none !important;
         padding: 0 !important;
     }
-    .category-bullet { color: var(--poke-red); font-size: 0.75rem; }
+
+    .category-bullet {
+        color: var(--poke-red);
+        font-size: 0.75rem;
+    }
 
     .challenge-card {
         background: var(--poke-panel);
@@ -52,33 +66,56 @@
         box-shadow: var(--pixel-shadow);
         color: var(--poke-dark);
     }
+
     .challenge-card::before {
         content: '';
         display: block;
         height: 6px;
         background: var(--poke-yellow);
-        border-bottom: 1px solid rgba(30,22,8,0.2);
+        border-bottom: 1px solid rgba(30, 22, 8, 0.2);
         flex-shrink: 0;
     }
+
     .challenge-card:hover {
         transform: translate(-2px, -2px);
-        box-shadow: 5px 5px 0 rgba(30,22,8,0.4);
+        box-shadow: 5px 5px 0 rgba(30, 22, 8, 0.4);
         border-color: var(--poke-red);
     }
+
     .challenge-card.challenge-solved {
         border-color: #3a7a3a;
-        box-shadow: 3px 3px 0 rgba(30,22,8,0.3);
+        box-shadow: 3px 3px 0 rgba(30, 22, 8, 0.3);
         opacity: 0.75;
     }
-    .challenge-card.challenge-solved::before { background: #3a7a3a; }
+
+    .challenge-card.challenge-solved::before {
+        background: #3a7a3a;
+    }
 
     /* Difficulty border + top stripe */
-    .diff-border-easy { border-color: #3a7a3a !important; }
-    .diff-border-easy::before { background: #3a7a3a; }
-    .diff-border-med { border-color: #b06000 !important; }
-    .diff-border-med::before { background: #b06000; }
-    .diff-border-hard { border-color: var(--poke-red) !important; }
-    .diff-border-hard::before { background: var(--poke-red); }
+    .diff-border-easy {
+        border-color: #3a7a3a !important;
+    }
+
+    .diff-border-easy::before {
+        background: #3a7a3a;
+    }
+
+    .diff-border-med {
+        border-color: #b06000 !important;
+    }
+
+    .diff-border-med::before {
+        background: #b06000;
+    }
+
+    .diff-border-hard {
+        border-color: var(--poke-red) !important;
+    }
+
+    .diff-border-hard::before {
+        background: var(--poke-red);
+    }
 
     /* Difficulty badge */
     .diff-badge {
@@ -91,11 +128,28 @@
         line-height: 1.8;
         letter-spacing: 1px;
     }
-    .diff-easy { color: #3a7a3a; border-color: #3a7a3a; background: rgba(58,122,58,0.1); }
-    .diff-med  { color: #b06000; border-color: #b06000; background: rgba(176,96,0,0.1); }
-    .diff-hard { color: var(--poke-red); border-color: var(--poke-red); background: rgba(176,40,40,0.08); }
 
-    .challenge-inner { padding: 1.2rem; }
+    .diff-easy {
+        color: #3a7a3a;
+        border-color: #3a7a3a;
+        background: rgba(58, 122, 58, 0.1);
+    }
+
+    .diff-med {
+        color: #b06000;
+        border-color: #b06000;
+        background: rgba(176, 96, 0, 0.1);
+    }
+
+    .diff-hard {
+        color: var(--poke-red);
+        border-color: var(--poke-red);
+        background: rgba(176, 40, 40, 0.08);
+    }
+
+    .challenge-inner {
+        padding: 1.2rem;
+    }
 
     .challenge-card-title {
         font-family: var(--poke-font) !important;
@@ -104,6 +158,7 @@
         margin-bottom: 0.5rem;
         line-height: 1.8;
     }
+
     .challenge-card-cp {
         font-family: var(--poke-font) !important;
         font-size: 0.72rem !important;
@@ -114,8 +169,11 @@
 
     .solved-overlay {
         position: absolute;
-        top: 0; left: 0; right: 0; bottom: 0;
-        background: rgba(30,22,8,0.88);
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(30, 22, 8, 0.88);
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -127,7 +185,10 @@
         opacity: 0;
         transition: opacity 0.25s ease;
     }
-    .challenge-solved .solved-overlay { opacity: 1; }
+
+    .challenge-solved .solved-overlay {
+        opacity: 1;
+    }
 
     .pokeball-icon {
         width: 44px;
@@ -140,22 +201,39 @@
         position: relative;
         flex-shrink: 0;
     }
+
     .pokeball-icon::after {
         content: '';
         position: absolute;
-        left: 50%; top: 50%;
+        left: 50%;
+        top: 50%;
         transform: translate(-50%, -50%);
-        width: 12px; height: 12px;
+        width: 12px;
+        height: 12px;
         border-radius: 50%;
         background: var(--poke-panel);
         border: 3px solid var(--poke-dark);
     }
+
     @keyframes pokeball-wobble {
-        0%, 100% { transform: rotate(0deg); }
-        25% { transform: rotate(12deg); }
-        75% { transform: rotate(-12deg); }
+
+        0%,
+        100% {
+            transform: rotate(0deg);
+        }
+
+        25% {
+            transform: rotate(12deg);
+        }
+
+        75% {
+            transform: rotate(-12deg);
+        }
     }
-    .challenge-solved:hover .pokeball-icon { animation: pokeball-wobble 0.6s ease-in-out; }
+
+    .challenge-solved:hover .pokeball-icon {
+        animation: pokeball-wobble 0.6s ease-in-out;
+    }
 </style>
 {% endblock %}
 
@@ -174,8 +252,10 @@
         </div>
     </div>
 
-    <div x-data="ChallengeBoard" @load-challenges.window="loadChallenges()" @load-challenge.window="loadChallenge($event.detail)">
-        <div x-ref="challengeWindow" id="challenge-window" class="modal fade" tabindex="-1" role="dialog" x-data x-html="$store.challenge.data.view"></div>
+    <div x-data="ChallengeBoard" @load-challenges.window="loadChallenges()"
+        @load-challenge.window="loadChallenge($event.detail)">
+        <div x-ref="challengeWindow" id="challenge-window" class="modal fade" tabindex="-1" role="dialog" x-data
+            x-html="$store.challenge.data.view"></div>
 
         <div x-show="!loaded">
             <div class="min-vh-50 d-flex align-items-center">
@@ -197,21 +277,19 @@
                     <div class="challenges-row row">
                         <template x-for="c in getChallenges(category)" :key="c.id">
                             <div class="col-sm-6 col-md-4 col-lg-3 my-3">
-                                <div class="challenge-card"
-                                    :class="{
+                                <div class="challenge-card" :class="{
                                         'challenge-solved': c.solved_by_me,
-                                        'diff-border-easy': !c.solved_by_me && c.value < 100,
-                                        'diff-border-med':  !c.solved_by_me && c.value >= 100 && c.value <= 200,
+                                        'diff-border-easy': !c.solved_by_me && c.value < 125,
+                                        'diff-border-med':  !c.solved_by_me && c.value >= 125 && c.value <= 200,
                                         'diff-border-hard': !c.solved_by_me && c.value > 200
-                                    }"
-                                    @click="loadChallenge(c.id)">
+                                    }" @click="loadChallenge(c.id)">
                                     <div class="challenge-inner">
                                         <h4 class="challenge-card-title" x-text="c.name"></h4>
                                         <p class="challenge-card-cp">CP <span x-text="c.value"></span></p>
                                         <div class="mt-1">
                                             <span class="diff-badge"
-                                                  :class="c.value < 100 ? 'diff-easy' : c.value <= 200 ? 'diff-med' : 'diff-hard'"
-                                                  x-text="c.value < 100 ? 'EASY' : c.value <= 200 ? 'MEDIUM' : 'HARD'"></span>
+                                                :class="c.value < 125 ? 'diff-easy' : c.value <= 200 ? 'diff-med' : 'diff-hard'"
+                                                x-text="c.value < 125 ? 'EASY' : c.value <= 200 ? 'MEDIUM' : 'HARD'"></span>
                                         </div>
                                     </div>
                                     <div x-show="c.solved_by_me" class="solved-overlay">
@@ -230,5 +308,5 @@
 {% endblock %}
 
 {% block scripts %}
-  {{ Assets.js("assets/js/challenges.js") }}
+{{ Assets.js("assets/js/challenges.js") }}
 {% endblock %}
